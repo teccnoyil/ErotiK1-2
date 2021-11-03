@@ -134,7 +134,9 @@ public class principal extends javax.swing.JFrame {
     }//GEN-LAST:event_ItemCambiarUsuarioActionPerformed
 
     private void ItemClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemClientesActionPerformed
-        // TODO add your handling code here:
+       ClientesFrecuentes form= new ClientesFrecuentes();
+       form.setVisible(true);
+                        this.dispose();
     }//GEN-LAST:event_ItemClientesActionPerformed
 
     /**

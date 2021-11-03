@@ -6,13 +6,7 @@
 package formularios;
 
 import conexion.conexionSQL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,13 +15,21 @@ import javax.swing.table.DefaultTableModel;
  * @author big_a
  */
 public class ModificaUsuario extends javax.swing.JFrame {
- conexionSQL cc=new conexionSQL();
-   com.mysql.jdbc.Connection con=cc.conexion();
+
+    conexionSQL cc = new conexionSQL();
+    Connection conectar;
+    DefaultTableModel model;
+    Statement st;
+    ResultSet rs;
+    int id = 0;
+    com.mysql.jdbc.Connection con = cc.conexion();
+
     /**
      * Creates new form ModificaUsuario
      */
     public ModificaUsuario() {
         initComponents();
+        listar();
     }
 
     /**
@@ -44,11 +46,11 @@ public class ModificaUsuario extends javax.swing.JFrame {
         txtcontraN = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        BotonActualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaDatos = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botonBuscar = new javax.swing.JButton();
+        BotonEliminar = new javax.swing.JButton();
         txtnombreN = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -93,25 +95,22 @@ public class ModificaUsuario extends javax.swing.JFrame {
         jLabel4.setText(" Usuario");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 450, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(255, 102, 255));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Cambiar Usuario");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BotonActualizar.setBackground(new java.awt.Color(255, 102, 255));
+        BotonActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        BotonActualizar.setText("Cambiar Usuario");
+        BotonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BotonActualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 610, -1, -1));
+        jPanel1.add(BotonActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 610, -1, -1));
 
         TablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Usuario", "Contraseña"
             }
         ));
         TablaDatos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -123,23 +122,23 @@ public class ModificaUsuario extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 500, -1, 120));
 
-        jButton2.setText("Buscar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonBuscar.setText("Buscar");
+        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 450, -1, -1));
+        jPanel1.add(botonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 450, -1, -1));
 
-        jButton3.setBackground(new java.awt.Color(153, 0, 51));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Eliminar Usuario");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        BotonEliminar.setBackground(new java.awt.Color(153, 0, 51));
+        BotonEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        BotonEliminar.setText("Eliminar Usuario");
+        BotonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                BotonEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 610, -1, -1));
+        jPanel1.add(BotonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 610, -1, -1));
         jPanel1.add(txtnombreN, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 490, 350, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -245,25 +244,28 @@ public class ModificaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtcontraNActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      Modificarusuario();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void BotonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonActualizarActionPerformed
+        Modificarusuario();
+        listar();
+
+
+    }//GEN-LAST:event_BotonActualizarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        principal form=new principal();  // Con esto nor permitirá acceder a otra pestañana al hacer click en el item
+        principal form = new principal();  // Con esto nor permitirá acceder a otra pestañana al hacer click en el item
         form.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void ItemUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemUsuariosActionPerformed
-        CrearUsuarios form=new CrearUsuarios();  // Con esto nor permitirá acceder a otra pestañana al hacer click en el item
-        form.setVisible(true); 
+        CrearUsuarios form = new CrearUsuarios();  // Con esto nor permitirá acceder a otra pestañana al hacer click en el item
+        form.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ItemUsuariosActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       String nombre = txtnombreN.getText();  // Creamos un String nombre y lo agregamos a nuestro textfield que tenda el nombre del usuario
-        String where = "";  
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
+     /*   String nombre = txtnombreN.getText();  // Creamos un String nombre y lo agregamos a nuestro textfield que tenda el nombre del usuario
+        String where = "";
         if (!"".equals(nombre)) {
             where = "WHERE user = '" + nombre + "'";     // Creamos esta condicion en SQL para que este puede localizar usuarios por nombre dentro de nuestra tabla 
         }
@@ -275,12 +277,12 @@ public class ModificaUsuario extends javax.swing.JFrame {
             ResultSetMetaData rsMd = rst.getMetaData();
             int numcolumnas = rsMd.getColumnCount();
             DefaultTableModel modelo = new DefaultTableModel();
-            this.TablaDatos.setModel(modelo);       
+            this.TablaDatos.setModel(modelo);
             for (int x = 1; x <= numcolumnas; x++) {
                 modelo.addColumn(rsMd.getColumnLabel(x)); // esto permitirá visualizar los datos de nuesta tabla, en un tabla grafica
             }
             while (rst.next()) {
-                Object[] fila = new Object[numcolumnas];  
+                Object[] fila = new Object[numcolumnas];
                 for (int y = 0; y < numcolumnas; y++) {
                     fila[y] = rst.getObject(y + 1);
                 }
@@ -294,61 +296,139 @@ public class ModificaUsuario extends javax.swing.JFrame {
         } catch (SQLException se) {
 
             se.printStackTrace();
-        }
-        
-    
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+        }*/
+
+
+    }//GEN-LAST:event_botonBuscarActionPerformed
 
     private void TablaDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaDatosMouseClicked
-       int filaSeleccionada=TablaDatos.rowAtPoint(evt.getPoint());              // esto nor permitirá obtener el dato del usuario que queramos con tan solo hacer click en la tabla
+        /*int filaSeleccionada=TablaDatos.rowAtPoint(evt.getPoint());              // esto nor permitirá obtener el dato del usuario que queramos con tan solo hacer click en la tabla
        txtID.setText(TablaDatos.getValueAt(filaSeleccionada, 0).toString());
        txtnombreN.setText(TablaDatos.getValueAt(filaSeleccionada,1).toString()); // y a su vez se llenarán de manera automatica en los textfields
-       txtcontraN.setText(TablaDatos.getValueAt(filaSeleccionada,2).toString());
-       
+       txtcontraN.setText(TablaDatos.getValueAt(filaSeleccionada,2).toString()); */
+
+        int fila = TablaDatos.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "usuario no seleccionado");
+        } else {
+            int id = Integer.parseInt((String) TablaDatos.getValueAt(fila, 0).toString());
+            String nombreN = (String) TablaDatos.getValueAt(fila, 1);
+            String contraN = (String) TablaDatos.getValueAt(fila, 2);
+            txtID.setText("" + id);
+            txtnombreN.setText(nombreN);
+            txtcontraN.setText(contraN);
+        }
+
+
     }//GEN-LAST:event_TablaDatosMouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
         EliminarDatos();  // Esto nos permitirá eliminar los datos de algun usuario al hacer click en el boton de "Eliminar DAtos"
-    }//GEN-LAST:event_jButton3ActionPerformed
+        listar();
+        nuevo();
+    }//GEN-LAST:event_BotonEliminarActionPerformed
 
-    public void EliminarDatos(){
-        int filaSeleccionada=TablaDatos.getSelectedRow();       // convertiremos en un int  la fila seleccionada de nuestra tabla
-        
-        try{
-            String SQL="delete from usuarios where ID="+TablaDatos.getValueAt(filaSeleccionada,0); // llenamos la siguiente intruccion SQL que nos permitirá eliminar el usuario que queramos 
-            Statement st=con.createStatement();
-            
-            int n=st.executeUpdate(SQL);
-            
-            if(n>=0){
-                JOptionPane.showMessageDialog(null,"Registro Eliminado");  // en caso de que la eliminacion haya sido correcta. nos lanzara el siguiente mensaje
+    public void EliminarDatos() {
+        int filaSeleccionada = TablaDatos.getSelectedRow();       // convertiremos en un int  la fila seleccionada de nuestra tabla
+
+        try {
+            String SQL = "delete from usuarios where ID=" + TablaDatos.getValueAt(filaSeleccionada, 0); // llenamos la siguiente intruccion SQL que nos permitirá eliminar el usuario que queramos 
+            Statement st = con.createStatement();
+
+            int n = st.executeUpdate(SQL);
+
+            if (n >= 0) {
+                JOptionPane.showMessageDialog(null, "Registro Eliminado");  // en caso de que la eliminacion haya sido correcta. nos lanzara el siguiente mensaje
+                limpiarTabla(model);
             }
-            
-        }catch (Exception e){
-             JOptionPane.showMessageDialog(null,"Error al Eliminar Registro"+e.getMessage()); // en caso contrari de que este no funcionara, nos lanzara este siguiente mensaje
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al Eliminar Registro" + e.getMessage()); // en caso contrari de que este no funcionara, nos lanzara este siguiente mensaje
         }
-        
+
+    }
+
+    
+
+    public void listar() {
+        String sql = "select * from usuarios";
+        try {
+            con = cc.conexion();
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            Object[] usuarios = new Object[3];
+            model = (DefaultTableModel) TablaDatos.getModel();
+            while (rs.next()) {
+                usuarios[0] = rs.getInt("ID");
+                usuarios[1] = rs.getString("user");
+                usuarios[2] = rs.getString("contraseña");
+                model.addRow(usuarios);
+            }
+            TablaDatos.setModel(model);
+
+        } catch (Exception e) {
+        }
+    }
+
+    public void Actualizar() {
+        limpiarTabla(model);
+        listar();
+    }
+
+    public void Modificarusuario() {
+        String id = txtID.getText();
+        String nombreN = txtnombreN.getText();
+        char[] contraN = txtcontraN.getPassword();
+        String SQL = "UPDATE usuarios set user='" + nombreN + "',contraseña='" + contraN + "' where ID=" + id;
+         try {
+              if (nombreN.equals("") || contraN.equals("")) {
+               con = cc.conexion();
+            st = con.createStatement();
+            rs = st.executeQuery(SQL);
+             JOptionPane.showMessageDialog(null, "usuario Actualizado");
+             limpiarTabla(model);
+        /*String SQL="UPDATE usuarios set user=?, contraseña=?, where ID=? ";*/
+        } else {
+            JOptionPane.showMessageDialog(null, "Error!!!!");
+              }
+            } catch (Exception e) {
+            }
+        }
+    
+
+   public void nuevo() {
+        txtID.setText("");
+        txtnombreN.setText("");
+        txtcontraN.setText("");
+        txtID.requestFocus();
+    }
+   public void limpiarTabla(DefaultTableModel model) {
+        for (int i = 0; i <= TablaDatos.getRowCount(); i++) {
+            model.removeRow(i);
+            i = i - 1;
+        }
     }
     
-    public void Modificarusuario(){
-        
-        int filaSeleccionada=TablaDatos.getSelectedRow();
-        String dan=(String)TablaDatos.getValueAt(filaSeleccionada,0);
-         
-        String SQL="UPDATE usuarios set user=?, contraseña=? where ID=? ";
-        
+    
+    
+    
+    
+    
+    
 
-         try{
+    /*try{
                
+        int filaSeleccionada=TablaDatos.getSelectedRow();
+        String dao=(String)TablaDatos.getValueAt(filaSeleccionada,0);
+         
+        String SQL="UPDATE usuarios set user=?, contraseña=?, where ID=? ";
              
              
-             
-             PreparedStatement pst= con.prepareStatement(SQL);
-             pst.setString(1, txtnombreN.getText());  
+        PreparedStatement pst= con.prepareStatement(SQL);
+             pst.setString(1, txtnombreN.getText().trim());  
             String pass=String.valueOf(txtcontraN.getPassword());                            
             pst.setString(2,pass);
-            pst.setString(3,dan);
+            pst.setString(3,dao);
             
         
             
@@ -368,10 +448,7 @@ public class ModificaUsuario extends javax.swing.JFrame {
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Error al Cambiar el Usuario"+e.getMessage());
         }
-    }
-    
-    
-    
+    }*/
     /**
      * @param args the command line arguments
      */
@@ -408,6 +485,8 @@ public class ModificaUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonActualizar;
+    private javax.swing.JButton BotonEliminar;
     private javax.swing.JLabel Fondo;
     private javax.swing.JMenuItem ItemCambiarUsuario;
     private javax.swing.JMenuItem ItemClientes;
@@ -418,9 +497,7 @@ public class ModificaUsuario extends javax.swing.JFrame {
     private javax.swing.JMenu MenuAyuda;
     private javax.swing.JMenu MenuReportes;
     private javax.swing.JTable TablaDatos;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton botonBuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
