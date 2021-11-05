@@ -113,6 +113,11 @@ public class ClientesFrecuentes extends javax.swing.JFrame {
 
         ItemProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/inventario.png"))); // NOI18N
         ItemProductos.setText("Productos");
+        ItemProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemProductosActionPerformed(evt);
+            }
+        });
         MenuArchivos.add(ItemProductos);
 
         ItemUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/clientes.png"))); // NOI18N
@@ -195,6 +200,12 @@ public class ClientesFrecuentes extends javax.swing.JFrame {
     private void RegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarClienteActionPerformed
        AgregarCliente();
     }//GEN-LAST:event_RegistrarClienteActionPerformed
+
+    private void ItemProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemProductosActionPerformed
+       Inventario form= new Inventario();
+       form.setVisible(true);
+                        this.dispose();
+    }//GEN-LAST:event_ItemProductosActionPerformed
 
     
     public void AgregarCliente(){

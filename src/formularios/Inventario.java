@@ -5,14 +5,19 @@
  */
 package formularios;
 
+import java.awt.Image;
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author big_a
  */
-public class Inventario extends javax.swing.JPanel {
+public class Inventario extends javax.swing.JFrame {
 
     /**
-     * Creates new form Inventario
+     * Creates new form NewJFrame
      */
     public Inventario() {
         initComponents();
@@ -28,21 +33,367 @@ public class Inventario extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jTextField1 = new javax.swing.JTextField();
+        ID_Productos = new javax.swing.JLabel();
+        Detalles_Productos = new javax.swing.JLabel();
+        Descripcion = new javax.swing.JLabel();
+        txtDescripción = new javax.swing.JTextField();
+        Precio = new javax.swing.JLabel();
+        txtPrecio = new javax.swing.JTextField();
+        IMAGEN = new javax.swing.JLabel();
+        txtImagen = new javax.swing.JTextField();
+        btnSeleccionar = new javax.swing.JButton();
+        btnMostrar = new javax.swing.JButton();
+        btnNuevo = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        FOTO = new javax.swing.JLabel();
+        FONDO = new javax.swing.JLabel();
+        Menu = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        MenuArchivos = new javax.swing.JMenu();
+        ItemClientes = new javax.swing.JMenuItem();
+        ItemProductos = new javax.swing.JMenuItem();
+        ItemUsuarios = new javax.swing.JMenuItem();
+        ItemCambiarUsuario = new javax.swing.JMenuItem();
+        MenuReportes = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        MenuAyuda = new javax.swing.JMenu();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/Sign Up.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 730));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Descripción", "Precio", "Imagen"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, -1, 110));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 230, 100, -1));
+
+        ID_Productos.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
+        ID_Productos.setText("ID Producto:");
+        jPanel1.add(ID_Productos, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 230, -1, -1));
+
+        Detalles_Productos.setFont(new java.awt.Font("Roboto", 3, 24)); // NOI18N
+        Detalles_Productos.setText("Detalles Productos");
+        jPanel1.add(Detalles_Productos, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, -1, -1));
+
+        Descripcion.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
+        Descripcion.setText("Descripción:");
+        jPanel1.add(Descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 230, -1, -1));
+        jPanel1.add(txtDescripción, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 230, 220, -1));
+
+        Precio.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
+        Precio.setText("Precio:");
+        jPanel1.add(Precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 290, -1, -1));
+
+        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 290, 100, -1));
+
+        IMAGEN.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
+        IMAGEN.setText("Imagen");
+        jPanel1.add(IMAGEN, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 290, -1, -1));
+        jPanel1.add(txtImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 290, 190, -1));
+
+        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 290, -1, -1));
+
+        btnMostrar.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        btnMostrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/Mostrar.png"))); // NOI18N
+        btnMostrar.setText("Mostrar");
+        btnMostrar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 450, 100, -1));
+
+        btnNuevo.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/nuevo.png"))); // NOI18N
+        btnNuevo.setText("Nuevo");
+        btnNuevo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 450, 90, -1));
+
+        btnGuardar.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/guardar.png"))); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 450, 90, -1));
+
+        btnActualizar.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/actualizar.png"))); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 450, 100, -1));
+
+        btnCancelar.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/cancelar.png"))); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 450, 90, -1));
+        jPanel1.add(FOTO, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 290, 280));
+
+        FONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/Sign Up.png"))); // NOI18N
+        jPanel1.add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
+
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/menu.png"))); // NOI18N
+        jMenu1.setText("Menu");
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/inventario.png"))); // NOI18N
+        jMenuItem1.setText("Menu Principal");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        Menu.add(jMenu1);
+
+        MenuArchivos.setBorder(null);
+        MenuArchivos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/archivos.png"))); // NOI18N
+        MenuArchivos.setText("Archivos");
+
+        ItemClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/usuarios_1.png"))); // NOI18N
+        ItemClientes.setText("Clientes");
+        ItemClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemClientesActionPerformed(evt);
+            }
+        });
+        MenuArchivos.add(ItemClientes);
+
+        ItemProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/inventario.png"))); // NOI18N
+        ItemProductos.setText("Productos");
+        MenuArchivos.add(ItemProductos);
+
+        ItemUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/clientes.png"))); // NOI18N
+        ItemUsuarios.setText("Usuarios");
+        ItemUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemUsuariosActionPerformed(evt);
+            }
+        });
+        MenuArchivos.add(ItemUsuarios);
+
+        ItemCambiarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/CambioUsuario.png"))); // NOI18N
+        ItemCambiarUsuario.setText("Cambiar Usuario");
+        ItemCambiarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemCambiarUsuarioActionPerformed(evt);
+            }
+        });
+        MenuArchivos.add(ItemCambiarUsuario);
+
+        Menu.add(MenuArchivos);
+
+        MenuReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/movimientos1.png"))); // NOI18N
+        MenuReportes.setText("Reportes");
+
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/factura.png"))); // NOI18N
+        jMenuItem3.setText("Nueva Factura");
+        MenuReportes.add(jMenuItem3);
+
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/movimientos.png"))); // NOI18N
+        jMenuItem4.setText("Reporte Facturas");
+        MenuReportes.add(jMenuItem4);
+
+        Menu.add(MenuReportes);
+
+        MenuAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/ayuda.png"))); // NOI18N
+        MenuAyuda.setText("Ayuda");
+        Menu.add(MenuAyuda);
+
+        setJMenuBar(Menu);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioActionPerformed
+
+    private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMostrarActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        principal form=new principal();
+        form.setVisible(true);  // Con esto nor permitirá acceder a otra pestañana al hacer click en el item
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void ItemClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemClientesActionPerformed
+          ClientesFrecuentes form= new ClientesFrecuentes();
+       form.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ItemClientesActionPerformed
+
+    private void ItemUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemUsuariosActionPerformed
+        CrearUsuarios form=new CrearUsuarios();
+        form.setVisible(true);  // Con esto nor permitirá acceder a otra pestañana al hacer click en el item
+        this.dispose();
+    }//GEN-LAST:event_ItemUsuariosActionPerformed
+
+    private void ItemCambiarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemCambiarUsuarioActionPerformed
+        ModificaUsuario form=new ModificaUsuario(); // Con esto nor permitirá acceder a otra pestañana al hacer click en el item
+        form.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ItemCambiarUsuarioActionPerformed
+
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+       JFileChooser archivo = new JFileChooser();
+       int ventana = archivo.showOpenDialog(null);
+       if(ventana == JFileChooser.APPROVE_OPTION){
+           File file = archivo.getSelectedFile();
+           txtImagen.setText(String.valueOf(file));
+           
+       Image foto= getToolkit().getImage(txtImagen.getText());
+       foto = foto.getScaledInstance(250,250, Image.SCALE_DEFAULT);
+       FOTO.setIcon(new ImageIcon(foto));
+       }
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Inventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Inventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Inventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Inventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Inventario().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel Descripcion;
+    private javax.swing.JLabel Detalles_Productos;
+    private javax.swing.JLabel FONDO;
+    private javax.swing.JLabel FOTO;
+    private javax.swing.JLabel ID_Productos;
+    private javax.swing.JLabel IMAGEN;
+    private javax.swing.JMenuItem ItemCambiarUsuario;
+    private javax.swing.JMenuItem ItemClientes;
+    private javax.swing.JMenuItem ItemProductos;
+    private javax.swing.JMenuItem ItemUsuarios;
+    private javax.swing.JMenuBar Menu;
+    private javax.swing.JMenu MenuArchivos;
+    private javax.swing.JMenu MenuAyuda;
+    private javax.swing.JMenu MenuReportes;
+    private javax.swing.JLabel Precio;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnMostrar;
+    private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnSeleccionar;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtDescripción;
+    private javax.swing.JTextField txtImagen;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }

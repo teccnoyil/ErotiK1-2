@@ -118,6 +118,11 @@ public class CrearUsuarios extends javax.swing.JFrame {
 
         ItemProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/inventario.png"))); // NOI18N
         ItemProductos.setText("Productos");
+        ItemProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemProductosActionPerformed(evt);
+            }
+        });
         MenuArchivos.add(ItemProductos);
 
         ItemUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/clientes.png"))); // NOI18N
@@ -198,6 +203,12 @@ public class CrearUsuarios extends javax.swing.JFrame {
     private void ItemClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemClientesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ItemClientesActionPerformed
+
+    private void ItemProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemProductosActionPerformed
+       Inventario form= new Inventario();
+       form.setVisible(true);
+                        this.dispose();
+    }//GEN-LAST:event_ItemProductosActionPerformed
 
     public void Agregarusuario(){
         String contraseña=String.valueOf(Ncontraseña.getPassword());  // creamos un String, y en ese string pasaremos los datos del dato que se introduzca en el textfield, y lo guardaremos
