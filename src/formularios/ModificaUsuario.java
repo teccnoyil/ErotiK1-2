@@ -7,6 +7,8 @@ package formularios;
 
 import conexion.conexionSQL;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,21 +44,20 @@ public class ModificaUsuario extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         txtcontraN = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         BotonActualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaDatos = new javax.swing.JTable();
-        botonBuscar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
         BotonEliminar = new javax.swing.JButton();
         txtnombreN = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtID = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        txtCorreo = new javax.swing.JTextField();
+        buscar = new javax.swing.JTextField();
+        btnModificar = new javax.swing.JButton();
         Fondo = new javax.swing.JLabel();
         Menu = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -75,15 +76,12 @@ public class ModificaUsuario extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_CambiarContraseña/monitor with profile icon 1.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 40, 260, 260));
-
         txtcontraN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtcontraNActionPerformed(evt);
             }
         });
-        jPanel1.add(txtcontraN, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 560, 350, -1));
+        jPanel1.add(txtcontraN, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 500, 510, 30));
 
         jLabel3.setFont(new java.awt.Font("Roboto", 3, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -95,22 +93,22 @@ public class ModificaUsuario extends javax.swing.JFrame {
         jLabel4.setText(" Usuario");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 450, -1, -1));
 
-        BotonActualizar.setBackground(new java.awt.Color(255, 102, 255));
-        BotonActualizar.setForeground(new java.awt.Color(255, 255, 255));
-        BotonActualizar.setText("Cambiar Usuario");
+        BotonActualizar.setFont(new java.awt.Font("Roboto", 3, 11)); // NOI18N
+        BotonActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_CambiarUsuario/update.png"))); // NOI18N
+        BotonActualizar.setText("Actualizar");
         BotonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonActualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(BotonActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 610, -1, -1));
+        jPanel1.add(BotonActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 570, 120, 40));
 
         TablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Usuario", "Contraseña"
+                "ID", "Usuario", "Contraseña", "Correo"
             }
         ));
         TablaDatos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -120,51 +118,54 @@ public class ModificaUsuario extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(TablaDatos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 500, -1, 120));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, -1, 120));
 
-        botonBuscar.setText("Buscar");
-        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpiar.setFont(new java.awt.Font("Roboto", 3, 11)); // NOI18N
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_CambiarUsuario/borrar.png"))); // NOI18N
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonBuscarActionPerformed(evt);
+                btnLimpiarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 450, -1, -1));
+        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 570, 120, 40));
 
-        BotonEliminar.setBackground(new java.awt.Color(153, 0, 51));
-        BotonEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        BotonEliminar.setText("Eliminar Usuario");
+        BotonEliminar.setFont(new java.awt.Font("Roboto", 3, 11)); // NOI18N
+        BotonEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_CambiarUsuario/Eliminar.png"))); // NOI18N
+        BotonEliminar.setText("Eliminar  ");
+        BotonEliminar.setBorder(null);
         BotonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(BotonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 610, -1, -1));
-        jPanel1.add(txtnombreN, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 490, 350, -1));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("ACTUALIZACION DE USUARIOS");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 630, 50));
+        jPanel1.add(BotonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 570, 120, 40));
+        jPanel1.add(txtnombreN, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 320, 520, 30));
 
         jLabel6.setFont(new java.awt.Font("Roboto", 3, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Busqueda de Usuarios");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 410, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Roboto", 3, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("ID");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 370, -1, -1));
-        jPanel1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 410, 350, -1));
+        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 410, 520, 30));
+        jPanel1.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, 190, 30));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_CambiarUsuario/checked-user-xxl.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 250, 260));
+        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_CambiarUsuario/modificar.png"))); // NOI18N
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, -1, 40));
 
-        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_CambiarUsuario/Dashboard Login.jpg"))); // NOI18N
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_CambiarUsuario/Sign Up.png"))); // NOI18N
         Fondo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 1280, 720));
+        jPanel1.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 700));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/menu.png"))); // NOI18N
         jMenu1.setText("Menu");
@@ -186,6 +187,11 @@ public class ModificaUsuario extends javax.swing.JFrame {
 
         ItemClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/usuarios_1.png"))); // NOI18N
         ItemClientes.setText("Clientes");
+        ItemClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemClientesActionPerformed(evt);
+            }
+        });
         MenuArchivos.add(ItemClientes);
 
         ItemProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/inventario.png"))); // NOI18N
@@ -250,7 +256,17 @@ public class ModificaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtcontraNActionPerformed
 
     private void BotonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonActualizarActionPerformed
-        Modificarusuario();
+
+        try {
+            PreparedStatement pst= con.prepareStatement("UPDATE usuarios SET user='"+txtnombreN.getText()+"',conraseña='"+txtcontraN.getPassword()+"',correo='"+txtCorreo.getText()+"WHERE ID="+buscar.getText()+"");
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Datos Actualizados");
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(ModificaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+         
         listar();
 
 
@@ -268,8 +284,11 @@ public class ModificaUsuario extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_ItemUsuariosActionPerformed
 
-    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
-     /*   String nombre = txtnombreN.getText();  // Creamos un String nombre y lo agregamos a nuestro textfield que tenda el nombre del usuario
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        limpiar();
+        
+        
+        /*   String nombre = txtnombreN.getText();  // Creamos un String nombre y lo agregamos a nuestro textfield que tenda el nombre del usuario
         String where = "";
         if (!"".equals(nombre)) {
             where = "WHERE user = '" + nombre + "'";     // Creamos esta condicion en SQL para que este puede localizar usuarios por nombre dentro de nuestra tabla 
@@ -304,7 +323,7 @@ public class ModificaUsuario extends javax.swing.JFrame {
         }*/
 
 
-    }//GEN-LAST:event_botonBuscarActionPerformed
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void TablaDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaDatosMouseClicked
         /*int filaSeleccionada=TablaDatos.rowAtPoint(evt.getPoint());              // esto nor permitirá obtener el dato del usuario que queramos con tan solo hacer click en la tabla
@@ -312,17 +331,19 @@ public class ModificaUsuario extends javax.swing.JFrame {
        txtnombreN.setText(TablaDatos.getValueAt(filaSeleccionada,1).toString()); // y a su vez se llenarán de manera automatica en los textfields
        txtcontraN.setText(TablaDatos.getValueAt(filaSeleccionada,2).toString()); */
 
-        int fila = TablaDatos.getSelectedRow();
+        /* int fila = TablaDatos.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(null, "usuario no seleccionado");
         } else {
             int id = Integer.parseInt((String) TablaDatos.getValueAt(fila, 0).toString());
             String nombreN = (String) TablaDatos.getValueAt(fila, 1);
             String contraN = (String) TablaDatos.getValueAt(fila, 2);
+            String CorreoN = (String) TablaDatos.getValueAt(fila,3);
             txtID.setText("" + id);
             txtnombreN.setText(nombreN);
+            txtCorreo.setText(CorreoN);
             txtcontraN.setText(contraN);
-        }
+        } */
 
 
     }//GEN-LAST:event_TablaDatosMouseClicked
@@ -330,14 +351,36 @@ public class ModificaUsuario extends javax.swing.JFrame {
     private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
         EliminarDatos();  // Esto nos permitirá eliminar los datos de algun usuario al hacer click en el boton de "Eliminar DAtos"
         listar();
-        nuevo();
+        limpiar();
+        
+       
     }//GEN-LAST:event_BotonEliminarActionPerformed
 
     private void ItemProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemProductosActionPerformed
        Inventario form= new Inventario();
        form.setVisible(true);
-                        this.dispose();
+        this.dispose();
     }//GEN-LAST:event_ItemProductosActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+int fila = TablaDatos.getSelectedRow();
+        if (fila >=0){
+            buscar.setText(TablaDatos.getValueAt(fila,0).toString());
+            txtnombreN.setText(TablaDatos.getValueAt(fila,1).toString());
+            txtcontraN.setText(TablaDatos.getValueAt(fila,2).toString()); 
+            txtCorreo.setText(TablaDatos.getValueAt(fila, 3).toString());
+
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Fila no Seleccionada");
+        }       
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void ItemClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemClientesActionPerformed
+        ClientesFrecuentes form= new ClientesFrecuentes();
+       form.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ItemClientesActionPerformed
 
     public void EliminarDatos() {
         int filaSeleccionada = TablaDatos.getSelectedRow();       // convertiremos en un int  la fila seleccionada de nuestra tabla
@@ -352,7 +395,7 @@ public class ModificaUsuario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Registro Eliminado");  // en caso de que la eliminacion haya sido correcta. nos lanzara el siguiente mensaje
                 limpiarTabla(model);
             }
-
+ JOptionPane.showConfirmDialog(null, "Estás seguro de eliminar este usuario?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al Eliminar Registro" + e.getMessage()); // en caso contrari de que este no funcionara, nos lanzara este siguiente mensaje
         }
@@ -367,12 +410,13 @@ public class ModificaUsuario extends javax.swing.JFrame {
             con = cc.conexion();
             st = con.createStatement();
             rs = st.executeQuery(sql);
-            Object[] usuarios = new Object[3];
+            Object[] usuarios = new Object[4];
             model = (DefaultTableModel) TablaDatos.getModel();
             while (rs.next()) {
                 usuarios[0] = rs.getInt("ID");
                 usuarios[1] = rs.getString("user");
                 usuarios[2] = rs.getString("contraseña");
+                usuarios[3] = rs.getString("correo");
                 model.addRow(usuarios);
             }
             TablaDatos.setModel(model);
@@ -387,7 +431,13 @@ public class ModificaUsuario extends javax.swing.JFrame {
     }
 
     public void Modificarusuario() {
-        String id = txtID.getText();
+       
+        
+        
+        
+        
+        
+        /* String id = txtID.getText();
         String nombreN = txtnombreN.getText();
         char[] contraN = txtcontraN.getPassword();
         String SQL = "UPDATE usuarios set user='" + nombreN + "',contraseña='" + contraN + "' where ID=" + id;
@@ -396,22 +446,25 @@ public class ModificaUsuario extends javax.swing.JFrame {
                con = cc.conexion();
             st = con.createStatement();
             rs = st.executeQuery(SQL);
+                 st.executeUpdate(SQL); 
+
              JOptionPane.showMessageDialog(null, "usuario Actualizado");
              limpiarTabla(model);
-        /*String SQL="UPDATE usuarios set user=?, contraseña=?, where ID=? ";*/
+        /*String SQL="UPDATE usuarios set user=?, contraseña=?, where ID=? "; 
         } else {
             JOptionPane.showMessageDialog(null, "Error!!!!");
               }
             } catch (Exception e) {
-            }
-        }
+            }*/
+        } 
     
 
-   public void nuevo() {
-        txtID.setText("");
+   public void limpiar() {
+        txtCorreo.setText("");
         txtnombreN.setText("");
         txtcontraN.setText("");
-        txtID.requestFocus();
+        buscar.setText("");
+        txtCorreo.requestFocus();
     }
    public void limpiarTabla(DefaultTableModel model) {
         for (int i = 0; i <= TablaDatos.getRowCount(); i++) {
@@ -508,12 +561,11 @@ public class ModificaUsuario extends javax.swing.JFrame {
     private javax.swing.JMenu MenuAyuda;
     private javax.swing.JMenu MenuReportes;
     private javax.swing.JTable TablaDatos;
-    private javax.swing.JButton botonBuscar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JTextField buscar;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
@@ -522,7 +574,7 @@ public class ModificaUsuario extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtCorreo;
     private javax.swing.JPasswordField txtcontraN;
     private javax.swing.JTextField txtnombreN;
     // End of variables declaration//GEN-END:variables

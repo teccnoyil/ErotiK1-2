@@ -168,7 +168,7 @@ public class Inventario extends javax.swing.JFrame {
 
         btnCancelar.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/cancelar.png"))); // NOI18N
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setText("Eliminar");
         btnCancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

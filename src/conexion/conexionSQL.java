@@ -21,6 +21,7 @@ public class conexionSQL {
         try{
             Class.forName("com.mysql.jdbc.Driver");
             conectar=(Connection) DriverManager.getConnection("jdbc:mysql://localhost/proyecto1","root","Teccnoyil1@"); // BD , TABLA, USUARIODB, CONTRASEÑADB
+            
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, "Error de Conexion"+e.getMessage()); // en Caso de un error, nos mostrará un mensaje junto con el error
         }

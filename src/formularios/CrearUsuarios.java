@@ -38,9 +38,11 @@ public class CrearUsuarios extends javax.swing.JFrame {
         usuario = new javax.swing.JLabel();
         Ncontraseña = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        logo = new javax.swing.JLabel();
+        txtCorreo = new javax.swing.JTextField();
         registro = new javax.swing.JLabel();
         blanco = new javax.swing.JLabel();
-        logo = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
         Menu = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -67,24 +69,34 @@ public class CrearUsuarios extends javax.swing.JFrame {
                 NagregarActionPerformed(evt);
             }
         });
-        jPanel1.add(Nagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 503, 250, 30));
-        jPanel1.add(Nusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 350, 430, 40));
+        jPanel1.add(Nagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 550, 250, 30));
+        jPanel1.add(Nusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 310, 430, 40));
 
         usuario.setText("Usuario");
-        jPanel1.add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 330, -1, -1));
-        jPanel1.add(Ncontraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 440, 430, 40));
+        jPanel1.add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 290, -1, -1));
+
+        Ncontraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NcontraseñaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Ncontraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 390, 430, 40));
 
         jLabel1.setText("Contraseña");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 410, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 370, -1, -1));
 
-        registro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Crearusuario/registro.png"))); // NOI18N
-        jPanel1.add(registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 0, 610, 730));
+        jLabel2.setText("Correo Electronico");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 450, -1, -1));
+
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Crearusuario/logo.png"))); // NOI18N
+        jPanel1.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 620, 270));
+        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 470, 430, 40));
+
+        registro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Crearusuario/fondo1.png"))); // NOI18N
+        jPanel1.add(registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 610, 730));
 
         blanco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Crearusuario/fondo.jpg"))); // NOI18N
         jPanel1.add(blanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 0, 660, 720));
-
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Crearusuario/logo.png"))); // NOI18N
-        jPanel1.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 620, 270));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Crearusuario/content.png"))); // NOI18N
         jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 730));
@@ -180,6 +192,7 @@ public class CrearUsuarios extends javax.swing.JFrame {
 
     private void NagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NagregarActionPerformed
         Agregarusuario(); // al momento de preciosar este boton, se realizara todos los pasos señalados de este metodo
+        limpiar();
     }//GEN-LAST:event_NagregarActionPerformed
 
     private void ItemUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemUsuariosActionPerformed
@@ -210,9 +223,21 @@ public class CrearUsuarios extends javax.swing.JFrame {
                         this.dispose();
     }//GEN-LAST:event_ItemProductosActionPerformed
 
+    private void NcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NcontraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NcontraseñaActionPerformed
+
+    public void limpiar() {
+        Nusuario.setText("");
+        Ncontraseña.setText("");
+        txtCorreo.setText("");
+        
+    }
+    
+    
     public void Agregarusuario(){
         String contraseña=String.valueOf(Ncontraseña.getPassword());  // creamos un String, y en ese string pasaremos los datos del dato que se introduzca en el textfield, y lo guardaremos
-        String SQL="insert into usuarios (user,contraseña) values(?,?)";   // Instrucción SQL para poder introducir los campos necesarios para crear un nuevo usuario
+        String SQL="insert into usuarios (user,contraseña,correo) values(?,?,?)";   // Instrucción SQL para poder introducir los campos necesarios para crear un nuevo usuario
         
         
         try{
@@ -220,7 +245,7 @@ public class CrearUsuarios extends javax.swing.JFrame {
             
             pst.setString(1, Nusuario.getText());  // creamos esta intruccion para poder introducir datos a nuestra tabla desde el textfield Nusuario
             pst.setString(2,contraseña);        // lo mismo pero desde la contraseña
-            
+            pst.setString(3,txtCorreo.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null,"Registro exitoso"); // creamos esto para que en caso de que todo saliera bie, nos lanze un mensaje de confirmacion
                     
@@ -280,6 +305,7 @@ public class CrearUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel blanco;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
@@ -287,6 +313,7 @@ public class CrearUsuarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel registro;
+    private javax.swing.JTextField txtCorreo;
     private javax.swing.JLabel usuario;
     // End of variables declaration//GEN-END:variables
 }
