@@ -384,7 +384,8 @@ int fila = TablaDatos.getSelectedRow();
 
     public void EliminarDatos() {
         int filaSeleccionada = TablaDatos.getSelectedRow();       // convertiremos en un int  la fila seleccionada de nuestra tabla
-
+        int m=JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar este usuario?","Registro",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if(m==JOptionPane.YES_NO_OPTION){
         try {
             String SQL = "delete from usuarios where ID=" + TablaDatos.getValueAt(filaSeleccionada, 0); // llenamos la siguiente intruccion SQL que nos permitirá eliminar el usuario que queramos 
             Statement st = con.createStatement();
@@ -395,12 +396,11 @@ int fila = TablaDatos.getSelectedRow();
                 JOptionPane.showMessageDialog(null, "Registro Eliminado");  // en caso de que la eliminacion haya sido correcta. nos lanzara el siguiente mensaje
                 limpiarTabla(model);
             }
- JOptionPane.showConfirmDialog(null, "Estás seguro de eliminar este usuario?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        } catch (Exception e) {
+         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al Eliminar Registro" + e.getMessage()); // en caso contrari de que este no funcionara, nos lanzara este siguiente mensaje
         }
 
-    }
+        }}
 
     
 
@@ -431,18 +431,28 @@ int fila = TablaDatos.getSelectedRow();
     }
 
     public void Modificarusuario() {
+   try{
+       PreparedStatement pasar=conectar.prepareStatement("Update usuarios set user='"+txtnombreN.getText()+"',correo"+txtCorreo.getText()
+               +"',contraseña"+txtcontraN.getPassword()+"' where ID='"+buscar.getText()+"'");
+       pasar.executeUpdate();
+       limpiar();
+       listar();
+   }catch(SQLException ex){
+       Logger.getLogger(ModificaUsuario.class.getName()).log(Level.SEVERE,null,ex);
+         limpiar();
+       listar();
        
+   }
         
         
         
         
-        
-        /* String id = txtID.getText();
+        /*String id = buscar.getText();
         String nombreN = txtnombreN.getText();
         char[] contraN = txtcontraN.getPassword();
-        String SQL = "UPDATE usuarios set user='" + nombreN + "',contraseña='" + contraN + "' where ID=" + id;
+        String SQL = "UPDATE usuarios set user='" + txtnombreN + "',contraseña='" + txtcontraN +  "',correo='" + txtCorreo + "' where ID=" + id;
          try {
-              if (nombreN.equals("") || contraN.equals("")) {
+              if (nombreN.equals("") || txtcontraN.equals("")) {
                con = cc.conexion();
             st = con.createStatement();
             rs = st.executeQuery(SQL);
@@ -450,13 +460,14 @@ int fila = TablaDatos.getSelectedRow();
 
              JOptionPane.showMessageDialog(null, "usuario Actualizado");
              limpiarTabla(model);
-        /*String SQL="UPDATE usuarios set user=?, contraseña=?, where ID=? "; 
+        //String SQL="UPDATE usuarios set user=?, contraseña=?, where ID=? "; 
         } else {
             JOptionPane.showMessageDialog(null, "Error!!!!");
               }
             } catch (Exception e) {
-            }*/
-        } 
+            
+            }}*/
+    }
     
 
    public void limpiar() {

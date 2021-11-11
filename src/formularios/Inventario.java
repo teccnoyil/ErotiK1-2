@@ -9,18 +9,34 @@ import java.awt.Image;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.table.DefaultTableModel;
+import conexion.conexionSQL;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+ 
 
 /**
  *
  * @author big_a
  */
 public class Inventario extends javax.swing.JFrame {
-
+ 
+         conexionSQL cc = new conexionSQL();
+    Connection conectar;
+    DefaultTableModel model;
+    Statement st;
+    ResultSet rs;
+    int id = 0;
+    com.mysql.jdbc.Connection con = cc.conexion();
     /**
      * Creates new form NewJFrame
      */
     public Inventario() {
         initComponents();
+        listarproductos();
+       
     }
 
     /**
@@ -34,9 +50,7 @@ public class Inventario extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        ID_Productos = new javax.swing.JLabel();
+        TablaDatos = new javax.swing.JTable();
         Detalles_Productos = new javax.swing.JLabel();
         Descripcion = new javax.swing.JLabel();
         txtDescripción = new javax.swing.JTextField();
@@ -69,25 +83,20 @@ public class Inventario extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Descripción", "Precio", "Imagen"
+                "ID", "Codigo", "Nombre", "Precio", "Imagen"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TablaDatos);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, -1, 110));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 230, 100, -1));
-
-        ID_Productos.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
-        ID_Productos.setText("ID Producto:");
-        jPanel1.add(ID_Productos, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 230, -1, -1));
 
         Detalles_Productos.setFont(new java.awt.Font("Roboto", 3, 24)); // NOI18N
         Detalles_Productos.setText("Detalles Productos");
@@ -322,6 +331,31 @@ public class Inventario extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
+    public void listarproductos() {
+        String sql = "select * from inventario";
+        try {
+            con = cc.conexion();
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            Object[] inventario = new Object[5];
+            model = (DefaultTableModel) TablaDatos.getModel();
+            while (rs.next()) {
+                inventario[0] = rs.getInt("ID");
+                inventario[1] = rs.getString("codigo");
+                inventario[2] = rs.getString("nombre");
+                inventario[3] = rs.getString("Precio");
+                inventario[4] = rs.getString("imagen");
+                model.addRow(inventario);
+            }
+            TablaDatos.setModel(model);
+
+        } catch (Exception e) {
+        }
+    }
+    
+    
+    
+    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -367,7 +401,6 @@ public class Inventario extends javax.swing.JFrame {
     private javax.swing.JLabel Detalles_Productos;
     private javax.swing.JLabel FONDO;
     private javax.swing.JLabel FOTO;
-    private javax.swing.JLabel ID_Productos;
     private javax.swing.JLabel IMAGEN;
     private javax.swing.JMenuItem ItemCambiarUsuario;
     private javax.swing.JMenuItem ItemClientes;
@@ -378,6 +411,7 @@ public class Inventario extends javax.swing.JFrame {
     private javax.swing.JMenu MenuAyuda;
     private javax.swing.JMenu MenuReportes;
     private javax.swing.JLabel Precio;
+    private javax.swing.JTable TablaDatos;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
@@ -390,8 +424,6 @@ public class Inventario extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtDescripción;
     private javax.swing.JTextField txtImagen;
     private javax.swing.JTextField txtPrecio;
