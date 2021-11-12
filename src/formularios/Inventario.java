@@ -12,8 +12,7 @@ import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import conexion.conexionSQL;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
  
 
@@ -22,8 +21,7 @@ import javax.swing.JOptionPane;
  * @author big_a
  */
 public class Inventario extends javax.swing.JFrame {
- 
-         conexionSQL cc = new conexionSQL();
+ conexionSQL cc = new conexionSQL();
     Connection conectar;
     DefaultTableModel model;
     Statement st;
@@ -55,15 +53,18 @@ public class Inventario extends javax.swing.JFrame {
         Descripcion = new javax.swing.JLabel();
         txtDescripción = new javax.swing.JTextField();
         Precio = new javax.swing.JLabel();
-        txtPrecio = new javax.swing.JTextField();
         IMAGEN = new javax.swing.JLabel();
         txtImagen = new javax.swing.JTextField();
         btnSeleccionar = new javax.swing.JButton();
-        btnMostrar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        Precio1 = new javax.swing.JLabel();
+        txtCodigo = new javax.swing.JTextField();
+        txtID = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
         FOTO = new javax.swing.JLabel();
         FONDO = new javax.swing.JLabel();
         Menu = new javax.swing.JMenuBar();
@@ -104,19 +105,12 @@ public class Inventario extends javax.swing.JFrame {
 
         Descripcion.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
         Descripcion.setText("Descripción:");
-        jPanel1.add(Descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 230, -1, -1));
-        jPanel1.add(txtDescripción, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 230, 220, -1));
+        jPanel1.add(Descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 230, -1, -1));
+        jPanel1.add(txtDescripción, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 230, 220, -1));
 
         Precio.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
         Precio.setText("Precio:");
         jPanel1.add(Precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 290, -1, -1));
-
-        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecioActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 290, 100, -1));
 
         IMAGEN.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
         IMAGEN.setText("Imagen");
@@ -131,16 +125,16 @@ public class Inventario extends javax.swing.JFrame {
         });
         jPanel1.add(btnSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 290, -1, -1));
 
-        btnMostrar.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        btnMostrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/Mostrar.png"))); // NOI18N
-        btnMostrar.setText("Mostrar");
-        btnMostrar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnMostrar.addActionListener(new java.awt.event.ActionListener() {
+        btnModificar.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/Mostrar.png"))); // NOI18N
+        btnModificar.setText("Modificar");
+        btnModificar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMostrarActionPerformed(evt);
+                btnModificarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 450, 100, -1));
+        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 450, 100, -1));
 
         btnNuevo.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/nuevo.png"))); // NOI18N
@@ -185,6 +179,19 @@ public class Inventario extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 450, 90, -1));
+
+        Precio1.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
+        Precio1.setText("Codigo");
+        jPanel1.add(Precio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, -1, -1));
+
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 230, 140, -1));
+        jPanel1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 350, 100, -1));
+        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 290, 140, -1));
         jPanel1.add(FOTO, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 290, 280));
 
         FONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/Sign Up.png"))); // NOI18N
@@ -274,16 +281,28 @@ public class Inventario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecioActionPerformed
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+     int fila = TablaDatos.getSelectedRow();
+        if (fila >=0){
+            txtID.setText(TablaDatos.getValueAt(fila,0).toString());
+            txtCodigo.setText(TablaDatos.getValueAt(fila,1).toString());
+            txtDescripción.setText(TablaDatos.getValueAt(fila,2).toString()); 
+            txtPrecio.setText(TablaDatos.getValueAt(fila, 3).toString());
+            txtImagen.setText(TablaDatos.getValueAt(fila, 4).toString());
 
-    private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMostrarActionPerformed
+
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Fila no Seleccionada");
+        }       
+    
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        // TODO add your handling code here:
+        Agregarusuario();
+        limpiar();
+        listarproductos();
+        
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -330,6 +349,58 @@ public class Inventario extends javax.swing.JFrame {
        FOTO.setIcon(new ImageIcon(foto));
        }
     }//GEN-LAST:event_btnSeleccionarActionPerformed
+public void EliminarDatos() {
+        int filaSeleccionada = TablaDatos.getSelectedRow();       // convertiremos en un int  la fila seleccionada de nuestra tabla
+        int m=JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar este usuario?","Registro",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if(m==JOptionPane.YES_NO_OPTION){
+        try {
+            String SQL = "delete from inventario where ID=" + TablaDatos.getValueAt(filaSeleccionada, 0); // llenamos la siguiente intruccion SQL que nos permitirá eliminar el usuario que queramos 
+            Statement st = con.createStatement();
+
+            int n = st.executeUpdate(SQL);
+
+            if (n >= 0) {
+                JOptionPane.showMessageDialog(null, "Registro Eliminado");  // en caso de que la eliminacion haya sido correcta. nos lanzara el siguiente mensaje
+                limpiarTabla(model);
+            }
+         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al Eliminar Registro" + e.getMessage()); // en caso contrari de que este no funcionara, nos lanzara este siguiente mensaje
+        }
+
+        }}
+
+
+   public void limpiar() {
+        txtCodigo.setText("");
+        txtDescripción.setText("");
+        txtPrecio.setText("");
+        txtImagen.setText("");
+    }
+   public void limpiarTabla(DefaultTableModel model) {
+        for (int i = 0; i <= TablaDatos.getRowCount(); i++) {
+            model.removeRow(i);
+            i = i - 1;
+        }
+    }
+    
+ public void Agregarusuario(){
+         String SQL="insert into inventario (codigo,Precio,imagen) values(?,?,?,?)";   // Instrucción SQL para poder introducir los campos necesarios para crear un nuevo usuario
+        
+        
+        try{
+            PreparedStatement pst= con.prepareStatement(SQL);  // creamos un statement
+            
+            pst.setString(1, txtCodigo.getText());  // creamos esta intruccion para poder introducir datos a nuestra tabla desde el textfield Nusuario
+            pst.setString(2,txtPrecio.getText());        // lo mismo pero desde la contraseña
+            pst.setString(3,txtDescripción.getText());
+            pst.setString(4,txtImagen());
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Registro exitoso"); // creamos esto para que en caso de que todo saliera bie, nos lanze un mensaje de confirmacion
+                    
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Error de Registro"+e.getMessage()); // y en caso de error nos lanzara este mensaje con el mensaje preciso de donde viene el error
+        }
+    }
 
     public void listarproductos() {
         String sql = "select * from inventario";
@@ -353,12 +424,18 @@ public class Inventario extends javax.swing.JFrame {
         }
     }
     
-    
+     
     
     
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        EliminarDatos();  // Esto nos permitirá eliminar los datos de algun usuario al hacer click en el boton de "Eliminar DAtos"
+       
+        limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -411,11 +488,12 @@ public class Inventario extends javax.swing.JFrame {
     private javax.swing.JMenu MenuAyuda;
     private javax.swing.JMenu MenuReportes;
     private javax.swing.JLabel Precio;
+    private javax.swing.JLabel Precio1;
     private javax.swing.JTable TablaDatos;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnMostrar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSeleccionar;
     private javax.swing.JMenu jMenu1;
@@ -424,8 +502,16 @@ public class Inventario extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDescripción;
+    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtImagen;
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
+
+    private String txtImagen() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
 }
