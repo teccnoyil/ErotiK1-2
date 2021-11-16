@@ -29,6 +29,7 @@ public class EnviarCodigo extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        EnviarCodigo = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         txtCodigo = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
@@ -47,6 +48,9 @@ public class EnviarCodigo extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        EnviarCodigo.setText("Enviar Codigo");
+        jPanel2.add(EnviarCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 280, -1, -1));
+
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
         jButton1.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
         jButton1.setText("Verificar Codigo");
@@ -55,7 +59,7 @@ public class EnviarCodigo extends javax.swing.JPanel {
         jPanel2.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 350, 40));
 
         candadito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_RecuperarContraseña/Forgot_Password.png"))); // NOI18N
-        jPanel2.add(candadito, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 220, 30));
+        jPanel2.add(candadito, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, 220, 30));
 
         avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_RecuperarContraseña/Avatar_Container.png"))); // NOI18N
         jPanel2.add(avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 450, 70));
@@ -68,7 +72,7 @@ public class EnviarCodigo extends javax.swing.JPanel {
         jPanel2.add(cuerpo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 430, 370));
 
         copy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_RecuperarContraseña/Copyright_Container.png"))); // NOI18N
-        jPanel2.add(copy, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 510, 310, 60));
+        jPanel2.add(copy, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 514, 310, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Login/Content.png"))); // NOI18N
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -119,6 +123,7 @@ public class EnviarCodigo extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton EnviarCodigo;
     private javax.swing.JLabel Fondo;
     private javax.swing.JLabel avatar;
     private javax.swing.JLabel candadito;

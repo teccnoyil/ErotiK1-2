@@ -94,6 +94,11 @@ public class login extends javax.swing.JFrame {
         jPanel2.add(avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 450, 80));
 
         OLVIDAR.setText("¿Olvidaste tu contraseña?");
+        OLVIDAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                OLVIDARMouseClicked(evt);
+            }
+        });
         jPanel2.add(OLVIDAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, -1, -1));
 
         OCULTAR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Login/ojo tapado.png"))); // NOI18N
@@ -151,6 +156,11 @@ public class login extends javax.swing.JFrame {
         OCULTAR.setVisible(false);
         Tcontraseña.setEchoChar('*');
     }//GEN-LAST:event_OCULTARMouseClicked
+
+    private void OLVIDARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OLVIDARMouseClicked
+EnviarCodigo form= new EnviarCodigo();
+       form.setVisible(true);
+                        this.dispose();    }//GEN-LAST:event_OLVIDARMouseClicked
     
     public void validadUsuario(){
         int resultado = 0; 
