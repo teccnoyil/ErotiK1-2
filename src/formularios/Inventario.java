@@ -296,6 +296,9 @@ public class Inventario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Fila no Seleccionada");
         }       
     
+      
+           
+ 
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed

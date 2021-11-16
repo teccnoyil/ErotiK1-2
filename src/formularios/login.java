@@ -20,6 +20,7 @@ public class login extends javax.swing.JFrame {
      */
     public login() {
         initComponents();
+        this.OCULTAR.setVisible(false);
      
     }
 
@@ -34,7 +35,6 @@ public class login extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
         Tcontraseña = new javax.swing.JPasswordField();
         Creditos = new javax.swing.JLabel();
         MensajeError = new javax.swing.JLabel();
@@ -44,6 +44,9 @@ public class login extends javax.swing.JFrame {
         Lusuarios = new javax.swing.JLabel();
         Lcontraseña = new javax.swing.JLabel();
         avatar = new javax.swing.JLabel();
+        OLVIDAR = new javax.swing.JLabel();
+        OCULTAR = new javax.swing.JLabel();
+        VER = new javax.swing.JLabel();
         fondoBlanco = new javax.swing.JLabel();
         bannerErotiK = new javax.swing.JLabel();
         bolafondo = new javax.swing.JLabel();
@@ -55,19 +58,15 @@ public class login extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jCheckBox1.setText("Recuerdame");
-        jCheckBox1.setBorder(null);
-        jPanel2.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, -1));
-        jPanel2.add(Tcontraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 360, 40));
+        jPanel2.add(Tcontraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 350, 40));
 
         Creditos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Login/Creditos.png"))); // NOI18N
-        jPanel2.add(Creditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, 250, 50));
+        jPanel2.add(Creditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 490, 250, 50));
 
         MensajeError.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         MensajeError.setForeground(new java.awt.Color(116, 120, 141));
         MensajeError.setText("En caso de error, contactar al Administrador");
-        jPanel2.add(MensajeError, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, -1, -1));
+        jPanel2.add(MensajeError, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 460, -1, -1));
 
         ingresar.setBackground(new java.awt.Color(250, 136, 182));
         ingresar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -78,12 +77,12 @@ public class login extends javax.swing.JFrame {
                 ingresarActionPerformed(evt);
             }
         });
-        jPanel2.add(ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 360, 40));
+        jPanel2.add(ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 360, 40));
 
         Candado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Candado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Login/Lock.png"))); // NOI18N
-        jPanel2.add(Candado, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, 20, 20));
-        jPanel2.add(Tusuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 360, 40));
+        jPanel2.add(Candado, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 460, 20, 20));
+        jPanel2.add(Tusuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 350, 40));
 
         Lusuarios.setText("Usuario:");
         jPanel2.add(Lusuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
@@ -93,6 +92,25 @@ public class login extends javax.swing.JFrame {
 
         avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Login/Avatar_Container.png"))); // NOI18N
         jPanel2.add(avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 450, 80));
+
+        OLVIDAR.setText("¿Olvidaste tu contraseña?");
+        jPanel2.add(OLVIDAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, -1, -1));
+
+        OCULTAR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Login/ojo tapado.png"))); // NOI18N
+        OCULTAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                OCULTARMouseClicked(evt);
+            }
+        });
+        jPanel2.add(OCULTAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 320, 30, 20));
+
+        VER.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Login/OJO.png"))); // NOI18N
+        VER.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                VERMouseClicked(evt);
+            }
+        });
+        jPanel2.add(VER, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 320, -1, 20));
 
         fondoBlanco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Login/Content.png"))); // NOI18N
         fondoBlanco.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -121,6 +139,18 @@ public class login extends javax.swing.JFrame {
     private void ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarActionPerformed
  validadUsuario(); // llamamos a este metodo para que ejecue todas las intrucciones al momento de hacer click en este boton
     }//GEN-LAST:event_ingresarActionPerformed
+
+    private void VERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VERMouseClicked
+        VER.setVisible(false);
+        OCULTAR.setVisible(true);
+        Tcontraseña.setEchoChar((char)0);
+    }//GEN-LAST:event_VERMouseClicked
+
+    private void OCULTARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OCULTARMouseClicked
+        VER.setVisible(true);
+        OCULTAR.setVisible(false);
+        Tcontraseña.setEchoChar('*');
+    }//GEN-LAST:event_OCULTARMouseClicked
     
     public void validadUsuario(){
         int resultado = 0; 
@@ -191,15 +221,17 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel Lcontraseña;
     private javax.swing.JLabel Lusuarios;
     private javax.swing.JLabel MensajeError;
+    private javax.swing.JLabel OCULTAR;
+    private javax.swing.JLabel OLVIDAR;
     private javax.swing.JPasswordField Tcontraseña;
     private javax.swing.JTextField Tusuarios;
+    private javax.swing.JLabel VER;
     private javax.swing.JLabel avatar;
     private javax.swing.JLabel bannerErotiK;
     private javax.swing.JLabel bolafondo;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel fondoBlanco;
     private javax.swing.JButton ingresar;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

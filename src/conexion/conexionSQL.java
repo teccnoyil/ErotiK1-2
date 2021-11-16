@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 public class conexionSQL {
 
     Connection conectar=null;
+
+
     
     public Connection conexion(){  //IMPORTAMOS NUESTRA LIBRERIA SQL Y REALIZAMOS NUESTA CONFIGURACIÓN INICIAL
         try{

@@ -5,6 +5,7 @@
  */
 package formularios;
 
+import java.awt.*;
 import conexion.conexionSQL;
 import java.sql.*;
 import java.util.logging.Level;
@@ -21,7 +22,7 @@ public class ModificaUsuario extends javax.swing.JFrame {
     conexionSQL cc = new conexionSQL();
     Connection conectar;
     DefaultTableModel model;
-    Statement st;
+    Statement st = null;
     ResultSet rs;
     int id = 0;
     com.mysql.jdbc.Connection con = cc.conexion();
@@ -45,7 +46,6 @@ public class ModificaUsuario extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         txtcontraN = new javax.swing.JPasswordField();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         BotonActualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -56,7 +56,7 @@ public class ModificaUsuario extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
-        buscar = new javax.swing.JTextField();
+        txtID = new javax.swing.JTextField();
         btnModificar = new javax.swing.JButton();
         Fondo = new javax.swing.JLabel();
         Menu = new javax.swing.JMenuBar();
@@ -81,12 +81,7 @@ public class ModificaUsuario extends javax.swing.JFrame {
                 txtcontraNActionPerformed(evt);
             }
         });
-        jPanel1.add(txtcontraN, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 500, 510, 30));
-
-        jLabel3.setFont(new java.awt.Font("Roboto", 3, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Contraseña");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 520, -1, -1));
+        jPanel1.add(txtcontraN, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 410, 510, 30));
 
         jLabel4.setFont(new java.awt.Font("Roboto", 3, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -151,8 +146,8 @@ public class ModificaUsuario extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("ID");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 370, -1, -1));
-        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 410, 520, 30));
-        jPanel1.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, 190, 30));
+        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 500, 520, 30));
+        jPanel1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, 190, 30));
 
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_CambiarUsuario/modificar.png"))); // NOI18N
         btnModificar.setText("Modificar");
@@ -256,18 +251,38 @@ public class ModificaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtcontraNActionPerformed
 
     private void BotonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonActualizarActionPerformed
+Modificarusuario();        
+      // limpiar();
+      //  listar();
 
-        try {
-            PreparedStatement pst= con.prepareStatement("UPDATE usuarios SET user='"+txtnombreN.getText()+"',conraseña='"+txtcontraN.getPassword()+"',correo='"+txtCorreo.getText()+"WHERE ID="+buscar.getText()+"");
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Datos Actualizados");
-        
-        } catch (SQLException ex) {
-            Logger.getLogger(ModificaUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-           
-         
+/*try{
+    String contraseña=String.valueOf(txtcontraN.getPassword());
+
+    String sql="Update usuarios set user=?, contraseña=?, correo=? "+
+            "where ID=?";
+    int fila=TablaDatos.getSelectedRow();
+    String dao=(String)TablaDatos.getValueAt(fila,0);
+    PreparedStatement ps=conectar.prepareCall(sql);
+    ps.setString(1,txtnombreN.getText());
+    ps.setString(2,contraseña);
+    ps.setString(3,txtCorreo.getText());
+
+     //BasedeDatos
+
+   ps.setString(4,dao);//la llamada sql se muestra en la tabla
+
+    int n=ps.executeUpdate();
+    if(n>0){
+        limpiar();
         listar();
+        JOptionPane.showMessageDialog(null, "datos modificados");
+       
+    }
+}catch (Exception e){
+    JOptionPane.showMessageDialog(null, "error"+ e.getMessage());
+}*/
+         
+      
 
 
     }//GEN-LAST:event_BotonActualizarActionPerformed
@@ -287,63 +302,11 @@ public class ModificaUsuario extends javax.swing.JFrame {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         limpiar();
         
-        
-        /*   String nombre = txtnombreN.getText();  // Creamos un String nombre y lo agregamos a nuestro textfield que tenda el nombre del usuario
-        String where = "";
-        if (!"".equals(nombre)) {
-            where = "WHERE user = '" + nombre + "'";     // Creamos esta condicion en SQL para que este puede localizar usuarios por nombre dentro de nuestra tabla 
-        }
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/proyecto1", "root", "Teccnoyil1@");  // Conectividad con nuestra base de datos con las credenciales Correspondientes
-            Statement stm = conexion.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT * FROM usuarios " + where);
-            ResultSetMetaData rsMd = rst.getMetaData();
-            int numcolumnas = rsMd.getColumnCount();
-            DefaultTableModel modelo = new DefaultTableModel();
-            this.TablaDatos.setModel(modelo);
-            for (int x = 1; x <= numcolumnas; x++) {
-                modelo.addColumn(rsMd.getColumnLabel(x)); // esto permitirá visualizar los datos de nuesta tabla, en un tabla grafica
-            }
-            while (rst.next()) {
-                Object[] fila = new Object[numcolumnas];
-                for (int y = 0; y < numcolumnas; y++) {
-                    fila[y] = rst.getObject(y + 1);
-                }
-
-                modelo.addRow(fila);
-            }
-        } catch (ClassNotFoundException ce) {
-
-            ce.printStackTrace();
-
-        } catch (SQLException se) {
-
-            se.printStackTrace();
-        }*/
-
-
+  
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void TablaDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaDatosMouseClicked
-        /*int filaSeleccionada=TablaDatos.rowAtPoint(evt.getPoint());              // esto nor permitirá obtener el dato del usuario que queramos con tan solo hacer click en la tabla
-       txtID.setText(TablaDatos.getValueAt(filaSeleccionada, 0).toString());
-       txtnombreN.setText(TablaDatos.getValueAt(filaSeleccionada,1).toString()); // y a su vez se llenarán de manera automatica en los textfields
-       txtcontraN.setText(TablaDatos.getValueAt(filaSeleccionada,2).toString()); */
-
-        /* int fila = TablaDatos.getSelectedRow();
-        if (fila == -1) {
-            JOptionPane.showMessageDialog(null, "usuario no seleccionado");
-        } else {
-            int id = Integer.parseInt((String) TablaDatos.getValueAt(fila, 0).toString());
-            String nombreN = (String) TablaDatos.getValueAt(fila, 1);
-            String contraN = (String) TablaDatos.getValueAt(fila, 2);
-            String CorreoN = (String) TablaDatos.getValueAt(fila,3);
-            txtID.setText("" + id);
-            txtnombreN.setText(nombreN);
-            txtCorreo.setText(CorreoN);
-            txtcontraN.setText(contraN);
-        } */
+       
 
 
     }//GEN-LAST:event_TablaDatosMouseClicked
@@ -363,9 +326,10 @@ public class ModificaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_ItemProductosActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-int fila = TablaDatos.getSelectedRow();
+        
+        int fila = TablaDatos.getSelectedRow();
         if (fila >=0){
-            buscar.setText(TablaDatos.getValueAt(fila,0).toString());
+            txtID.setText(TablaDatos.getValueAt(fila,0).toString());
             txtnombreN.setText(TablaDatos.getValueAt(fila,1).toString());
             txtcontraN.setText(TablaDatos.getValueAt(fila,2).toString()); 
             txtCorreo.setText(TablaDatos.getValueAt(fila, 3).toString());
@@ -430,53 +394,79 @@ int fila = TablaDatos.getSelectedRow();
         listar();
     }
 
-    public void Modificarusuario() {
-   try{
-       PreparedStatement pasar=conectar.prepareStatement("Update usuarios set user='"+txtnombreN.getText()+"',correo"+txtCorreo.getText()
-               +"',contraseña"+txtcontraN.getPassword()+"' where ID='"+buscar.getText()+"'");
-       pasar.executeUpdate();
-       limpiar();
-       listar();
-   }catch(SQLException ex){
-       Logger.getLogger(ModificaUsuario.class.getName()).log(Level.SEVERE,null,ex);
-         limpiar();
-       listar();
-       
-   }
-        
-        
-        
-        
-        /*String id = buscar.getText();
-        String nombreN = txtnombreN.getText();
-        char[] contraN = txtcontraN.getPassword();
-        String SQL = "UPDATE usuarios set user='" + txtnombreN + "',contraseña='" + txtcontraN +  "',correo='" + txtCorreo + "' where ID=" + id;
-         try {
-              if (nombreN.equals("") || txtcontraN.equals("")) {
-               con = cc.conexion();
-            st = con.createStatement();
-            rs = st.executeQuery(SQL);
-                 st.executeUpdate(SQL); 
-
-             JOptionPane.showMessageDialog(null, "usuario Actualizado");
-             limpiarTabla(model);
-        //String SQL="UPDATE usuarios set user=?, contraseña=?, where ID=? "; 
-        } else {
-            JOptionPane.showMessageDialog(null, "Error!!!!");
-              }
-            } catch (Exception e) {
+     public void Modificarusuario() {
+            /*String id = txtID.getText().trim();
+            String nombre = txtnombreN.getText().trim();
+            String contraN=String.valueOf(txtcontraN.getPassword());
+            String correo = txtCorreo.getText().trim();
+      try {
+            PreparedStatement ps = (PreparedStatement) conectar .prepareStatement("Update usuarios set user=?, contraseña=?, correo=? wbere ID=?");
             
-            }}*/
+            ps.setString(0,id);
+              ps.setString(1,nombre);
+                ps.setString(2,contraN);
+                  ps.setString(3, correo);
+                  
+                    //SET user='"+txtnombreN.getText()+",contraseña='"+txtcontraN.getText().trim()+",correo='"+txtCorreo.getText()
+            //+" WHERE ID="+txtID.getText()+";");
+           // ps.executeUpdate();
+             int n=ps.executeUpdate();
+    if(n>0){
+        limpiar();
+        listar();
+        JOptionPane.showMessageDialog(null, "datos modificados");
+     
     }
-    
+           // JOptionPane.showMessageDialog(null, "Datos Actualizados");
+        } catch (SQLException ex) {
+            Logger.getLogger(ModificaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(null,"Error al Cambiar el Usuario"+ex.getMessage());
+
+        }   */
+         
+         
+         
+         
+try{
+   // String contraseña=String.valueOf(txtcontraN.getPassword());
+
+    String sql="Update usuarios set user=?, contraseña=?, correo=? "+
+            "where ID=?";
+     int fila=TablaDatos.getSelectedRow();
+    String dao=(String)TablaDatos.getValueAt(fila,0);
+    PreparedStatement ps=conectar.prepareCall(sql);
+    ps.setString(1,txtID.getText());
+    ps.setString(2,txtnombreN.getText());
+    ps.setString(3,txtcontraN.getText());
+    ps.setString(4,txtCorreo.getText());
+
+     //BasedeDatos
+
+   ps.setString(5,dao);//la llamada sql se muestra en la tabla
+
+    int n=ps.executeUpdate();
+    if(n>0){
+        limpiar();
+        listar();
+        JOptionPane.showMessageDialog(null, "datos modificados");  
+     
+    }
+    }catch (Exception e){
+    JOptionPane.showMessageDialog(null, "error"+ e.getMessage());
+
+    }
+
+     }
 
    public void limpiar() {
         txtCorreo.setText("");
         txtnombreN.setText("");
         txtcontraN.setText("");
-        buscar.setText("");
+        txtID.setText("");
         txtCorreo.requestFocus();
     }
+   
+   
    public void limpiarTabla(DefaultTableModel model) {
         for (int i = 0; i <= TablaDatos.getRowCount(); i++) {
             model.removeRow(i);
@@ -574,8 +564,6 @@ int fila = TablaDatos.getSelectedRow();
     private javax.swing.JTable TablaDatos;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JTextField buscar;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -586,6 +574,7 @@ int fila = TablaDatos.getSelectedRow();
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtID;
     private javax.swing.JPasswordField txtcontraN;
     private javax.swing.JTextField txtnombreN;
     // End of variables declaration//GEN-END:variables
