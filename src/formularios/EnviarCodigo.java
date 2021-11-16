@@ -9,10 +9,10 @@ package formularios;
  *
  * @author big_a
  */
-public class EnviarCodigo extends javax.swing.JPanel {
+public class EnviarCodigo extends javax.swing.JFrame {
 
     /**
-     * Creates new form Recuperarcontra
+     * Creates new form EnviarCodigo111
      */
     public EnviarCodigo() {
         initComponents();
@@ -29,6 +29,7 @@ public class EnviarCodigo extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         EnviarCodigo = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         txtCodigo = new javax.swing.JTextField();
@@ -41,50 +42,87 @@ public class EnviarCodigo extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         Fondo = new javax.swing.JLabel();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         EnviarCodigo.setText("Enviar Codigo");
-        jPanel2.add(EnviarCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 280, -1, -1));
+        jPanel3.add(EnviarCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 140, 30));
 
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
-        jButton1.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Verificar Codigo");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 410, 40));
-        jPanel2.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 350, 40));
-        jPanel2.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 350, 40));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 140, 30));
+        jPanel3.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 350, 40));
+        jPanel3.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 350, 40));
 
         candadito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_RecuperarContraseña/Forgot_Password.png"))); // NOI18N
-        jPanel2.add(candadito, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, 220, 30));
+        candadito.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                candaditoMouseClicked(evt);
+            }
+        });
+        jPanel3.add(candadito, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 220, 30));
 
         avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_RecuperarContraseña/Avatar_Container.png"))); // NOI18N
-        jPanel2.add(avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 450, 70));
+        jPanel3.add(avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 450, 70));
 
         header.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_RecuperarContraseña/Card_Header.png"))); // NOI18N
         header.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, -1));
+        jPanel3.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, -1));
 
         cuerpo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_RecuperarContraseña/Card_Content.png"))); // NOI18N
-        jPanel2.add(cuerpo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 430, 370));
+        jPanel3.add(cuerpo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 430, 370));
 
         copy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_RecuperarContraseña/Copyright_Container.png"))); // NOI18N
-        jPanel2.add(copy, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 514, 310, -1));
+        jPanel3.add(copy, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 514, 310, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Login/Content.png"))); // NOI18N
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 450, 610));
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 580));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 450, 580));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 450, 580));
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_RecuperarContraseña/Light theme.png"))); // NOI18N
-        jPanel1.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
+        jPanel2.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 1300, 730));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1280, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 720, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void candaditoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candaditoMouseClicked
+        login form= new login();
+       form.setVisible(true);
+                        this.dispose();
+    }//GEN-LAST:event_candaditoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -103,24 +141,24 @@ public class EnviarCodigo extends javax.swing.JPanel {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EnviarCodigo111.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EnviarCodigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EnviarCodigo111.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EnviarCodigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EnviarCodigo111.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EnviarCodigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EnviarCodigo111.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EnviarCodigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EnviarCodigo111().setVisible(true);
+                new EnviarCodigo().setVisible(true);
             }
         });
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EnviarCodigo;
@@ -134,6 +172,7 @@ public class EnviarCodigo extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables

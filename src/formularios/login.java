@@ -61,7 +61,7 @@ public class login extends javax.swing.JFrame {
         jPanel2.add(Tcontraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 350, 40));
 
         Creditos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Login/Creditos.png"))); // NOI18N
-        jPanel2.add(Creditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 490, 250, 50));
+        jPanel2.add(Creditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, 250, 50));
 
         MensajeError.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         MensajeError.setForeground(new java.awt.Color(116, 120, 141));
