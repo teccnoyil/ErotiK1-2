@@ -24,7 +24,7 @@ public class ModificaUsuario extends javax.swing.JFrame {
     DefaultTableModel model;
     Statement st = null;
     ResultSet rs;
-    int id = 0;
+
     com.mysql.jdbc.Connection con = cc.conexion();
 
     /**

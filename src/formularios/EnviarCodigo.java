@@ -5,6 +5,15 @@
  */
 package formularios;
 
+import java.util.Properties;
+import java.util.Random;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author big_a
@@ -17,6 +26,7 @@ public class EnviarCodigo extends javax.swing.JFrame {
     public EnviarCodigo() {
         initComponents();
         this.setLocationRelativeTo(null);
+
     }
 
     /**
@@ -31,9 +41,9 @@ public class EnviarCodigo extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        EnviarCodigo = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        txtCodigo = new javax.swing.JTextField();
+        btnEnviarCodigo = new javax.swing.JButton();
+        btntxtVerificar = new javax.swing.JButton();
+        txtReContra = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
         candadito = new javax.swing.JLabel();
         avatar = new javax.swing.JLabel();
@@ -52,20 +62,25 @@ public class EnviarCodigo extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        EnviarCodigo.setText("Enviar Codigo");
-        jPanel3.add(EnviarCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 140, 30));
-
-        jButton1.setBackground(new java.awt.Color(255, 102, 102));
-        jButton1.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Verificar Codigo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnEnviarCodigo.setText("Enviar Codigo");
+        btnEnviarCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnEnviarCodigoActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 140, 30));
-        jPanel3.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 350, 40));
+        jPanel3.add(btnEnviarCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 140, 30));
+
+        btntxtVerificar.setBackground(new java.awt.Color(255, 102, 102));
+        btntxtVerificar.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
+        btntxtVerificar.setForeground(new java.awt.Color(255, 255, 255));
+        btntxtVerificar.setText("Verificar Codigo");
+        btntxtVerificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntxtVerificarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btntxtVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 140, 30));
+        jPanel3.add(txtReContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 350, 40));
         jPanel3.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 350, 40));
 
         candadito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_RecuperarContraseña/Forgot_Password.png"))); // NOI18N
@@ -130,11 +145,54 @@ public class EnviarCodigo extends javax.swing.JFrame {
                         this.dispose();
     }//GEN-LAST:event_candaditoMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      ResetearContraseña form= new ResetearContraseña();
-       form.setVisible(true);
-                        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btntxtVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntxtVerificarActionPerformed
+     int randomCode;
+        if(Integer.valueOf(txtCorreo.getText())==randomCode){
+login rs = new login(txtReContra.getText());
+rs.setVisible(true);
+this.setVisible(false);
+}else{
+JOptionPane.showMessageDialog(null, "code do not match");
+}
+    }//GEN-LAST:event_btntxtVerificarActionPerformed
+
+    private void btnEnviarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarCodigoActionPerformed
+               int randomCode;
+
+        try{
+Random rand = new Random();
+randomCode=rand.nextInt(999999);
+String host = "smtp.gmail.com";
+String user ="alanrespaldo98@gmail.com";
+String pass="bigmamaeloisa";
+String to = txtCorreo.getText();
+String subject="Reseting Code";
+String message ="Your reset code is "+randomCode;
+boolean sessionDebug = false;
+Properties pros = System.getProperties();
+pros.put("mail.smtp.starttls.enable", "true");
+pros.put("mail.smtp.host", "host");
+pros.put("mail.smtp.port","587");
+pros.put("mail.smtp.auth","true");
+pros.put("mail.smtp.starttls.required", "true");
+java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+Session mailSession = Session.getDefaultInstance(pros, null);
+mailSession.setDebug(sessionDebug);
+Message msg = new MimeMessage(mailSession);
+msg.setFrom(new InternetAddress(user));
+InternetAddress [] address = {new InternetAddress(to)};
+msg.setRecipients(Message.RecipientType.TO, address);
+msg.setSubject(subject);
+msg.setText(message);
+Transport transport = mailSession.getTransport("smtp");
+transport.connect(host, user, pass);
+transport.sendMessage(msg, msg.getAllRecipients());
+transport.close();
+JOptionPane.showMessageDialog(null, "code has been send to the email");
+}catch(Exception ex){
+JOptionPane.showMessageDialog(rootPane, ex);
+}
+    }//GEN-LAST:event_btnEnviarCodigoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,19 +231,19 @@ public class EnviarCodigo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton EnviarCodigo;
     private javax.swing.JLabel Fondo;
     private javax.swing.JLabel avatar;
+    private javax.swing.JButton btnEnviarCodigo;
+    private javax.swing.JButton btntxtVerificar;
     private javax.swing.JLabel candadito;
     private javax.swing.JLabel copy;
     private javax.swing.JLabel cuerpo;
     private javax.swing.JLabel header;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtReContra;
     // End of variables declaration//GEN-END:variables
 }
