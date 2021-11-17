@@ -32,6 +32,7 @@ public class ModificaUsuario extends javax.swing.JFrame {
      */
     public ModificaUsuario() {
         initComponents();
+        this.setLocationRelativeTo(null);
         listar();
     }
 

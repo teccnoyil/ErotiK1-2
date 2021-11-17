@@ -3,13 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/big_a/Documents/NetBeansProjects/ErotiK-master/src/formularios/principal.java</file>
             <file>file:/C:/Users/big_a/Documents/NetBeansProjects/ErotiK-master/src/formularios/EnviarCodigo.java</file>
-            <file>file:/C:/Users/big_a/Documents/NetBeansProjects/ErotiK-master/src/formularios/CrearUsuarios.java</file>
-            <file>file:/C:/Users/big_a/Documents/NetBeansProjects/ErotiK-master/src/formularios/ClientesFrecuentes.java</file>
-            <file>file:/C:/Users/big_a/Documents/NetBeansProjects/ErotiK-master/src/conexion/conexionSQL.java</file>
-            <file>file:/C:/Users/big_a/Documents/NetBeansProjects/ErotiK-master/src/formularios/ModificaUsuario.java</file>
-            <file>file:/C:/Users/big_a/Documents/NetBeansProjects/ErotiK-master/src/formularios/login.java</file>
+            <file>file:/C:/Users/big_a/Documents/NetBeansProjects/ErotiK-master/src/formularios/ResetearContraseña.java</file>
         </group>
     </open-files>
 </project-private>

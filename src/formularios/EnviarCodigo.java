@@ -16,6 +16,7 @@ public class EnviarCodigo extends javax.swing.JFrame {
      */
     public EnviarCodigo() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -58,6 +59,11 @@ public class EnviarCodigo extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Verificar Codigo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 140, 30));
         jPanel3.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 350, 40));
         jPanel3.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 350, 40));
@@ -68,7 +74,7 @@ public class EnviarCodigo extends javax.swing.JFrame {
                 candaditoMouseClicked(evt);
             }
         });
-        jPanel3.add(candadito, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 220, 30));
+        jPanel3.add(candadito, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 450, 200, 30));
 
         avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_RecuperarContraseña/Avatar_Container.png"))); // NOI18N
         jPanel3.add(avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 450, 70));
@@ -90,7 +96,7 @@ public class EnviarCodigo extends javax.swing.JFrame {
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 450, 580));
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_RecuperarContraseña/Light theme.png"))); // NOI18N
-        jPanel2.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 1300, 730));
+        jPanel2.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 1280, 730));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
@@ -123,6 +129,12 @@ public class EnviarCodigo extends javax.swing.JFrame {
        form.setVisible(true);
                         this.dispose();
     }//GEN-LAST:event_candaditoMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      ResetearContraseña form= new ResetearContraseña();
+       form.setVisible(true);
+                        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

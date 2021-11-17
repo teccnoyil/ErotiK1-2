@@ -22,6 +22,7 @@ public class ClientesFrecuentes extends javax.swing.JFrame {
      */
     public ClientesFrecuentes() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
