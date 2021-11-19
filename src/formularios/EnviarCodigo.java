@@ -5,9 +5,15 @@
  */
 package formularios;
 
-import java.util.Properties;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Properties; 
 import java.util.Random;
+import javax.mail.Authenticator;
 import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -19,6 +25,12 @@ import javax.swing.JOptionPane;
  * @author big_a
  */
 public class EnviarCodigo extends javax.swing.JFrame {
+Connection con = null;
+ResultSet rs = null;
+PreparedStatement pst = null;
+public String user;
+
+ int randomCode;
 
     /**
      * Creates new form EnviarCodigo111
@@ -47,6 +59,7 @@ public class EnviarCodigo extends javax.swing.JFrame {
         txtCorreo = new javax.swing.JTextField();
         candadito = new javax.swing.JLabel();
         avatar = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         header = new javax.swing.JLabel();
         cuerpo = new javax.swing.JLabel();
         copy = new javax.swing.JLabel();
@@ -93,6 +106,14 @@ public class EnviarCodigo extends javax.swing.JFrame {
 
         avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_RecuperarContraseña/Avatar_Container.png"))); // NOI18N
         jPanel3.add(avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 450, 70));
+
+        jButton1.setText("cambiar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, -1, -1));
 
         header.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_RecuperarContraseña/Card_Header.png"))); // NOI18N
         header.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -142,23 +163,21 @@ public class EnviarCodigo extends javax.swing.JFrame {
     private void candaditoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candaditoMouseClicked
         login form= new login();
        form.setVisible(true);
-                        this.dispose();
+         this.dispose();
     }//GEN-LAST:event_candaditoMouseClicked
 
     private void btntxtVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntxtVerificarActionPerformed
-     int randomCode;
-        if(Integer.valueOf(txtCorreo.getText())==randomCode){
-login rs = new login(txtReContra.getText());
-rs.setVisible(true);
-this.setVisible(false);
+        if(Integer.valueOf(txtReContra.getText())==randomCode){
+ResetearContraseña form = new ResetearContraseña();
+form.setVisible(true);
+  this.dispose();
 }else{
 JOptionPane.showMessageDialog(null, "code do not match");
 }
     }//GEN-LAST:event_btntxtVerificarActionPerformed
 
     private void btnEnviarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarCodigoActionPerformed
-               int randomCode;
-
+              
         try{
 Random rand = new Random();
 randomCode=rand.nextInt(999999);
@@ -166,8 +185,8 @@ String host = "smtp.gmail.com";
 String user ="alanrespaldo98@gmail.com";
 String pass="bigmamaeloisa";
 String to = txtCorreo.getText();
-String subject="Reseting Code";
-String message ="Your reset code is "+randomCode;
+String subject="Codigo de Reseto";
+String message ="Su Codigo de Reseteo es "+randomCode;
 boolean sessionDebug = false;
 Properties pros = System.getProperties();
 pros.put("mail.smtp.starttls.enable", "true");
@@ -184,15 +203,21 @@ InternetAddress [] address = {new InternetAddress(to)};
 msg.setRecipients(Message.RecipientType.TO, address);
 msg.setSubject(subject);
 msg.setText(message);
-Transport transport = mailSession.getTransport("smtp");
+Transport transport = mailSession.getTransport("smtps");
 transport.connect(host, user, pass);
 transport.sendMessage(msg, msg.getAllRecipients());
 transport.close();
-JOptionPane.showMessageDialog(null, "code has been send to the email");
+JOptionPane.showMessageDialog(null, "El codigo ha sido enviado a su correo");
 }catch(Exception ex){
 JOptionPane.showMessageDialog(rootPane, ex);
 }
     }//GEN-LAST:event_btnEnviarCodigoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     ResetearContraseña form = new ResetearContraseña();
+form.setVisible(true);
+ this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,6 +264,7 @@ JOptionPane.showMessageDialog(rootPane, ex);
     private javax.swing.JLabel copy;
     private javax.swing.JLabel cuerpo;
     private javax.swing.JLabel header;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

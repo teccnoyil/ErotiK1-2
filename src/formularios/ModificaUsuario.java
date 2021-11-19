@@ -431,8 +431,7 @@ Modificarusuario();
 try{
    // String contraseña=String.valueOf(txtcontraN.getPassword());
 
-    String sql="Update usuarios set user=?, contraseña=?, correo=? "+
-            "where ID=?";
+    String sql="UPDATE `usuarios` SET `user`=?,`contraseña`=?,`correo`=? WHERE ID=?";
      int fila=TablaDatos.getSelectedRow();
     String dao=(String)TablaDatos.getValueAt(fila,0);
     PreparedStatement ps=conectar.prepareCall(sql);

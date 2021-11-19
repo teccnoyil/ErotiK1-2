@@ -5,12 +5,23 @@
  */
 package formularios;
 
+import java.awt.*;
+import conexion.conexionSQL;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 /**
  *
  * @author big_a
  */
 public class ResetearContraseña extends javax.swing.JFrame {
-
+Connection con = null;
+ResultSet rs = null;
+PreparedStatement pst = null;
+public String user;
     /**
      * Creates new form EnviarCodigo111
      */
@@ -18,7 +29,9 @@ public class ResetearContraseña extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-
+ public ResetearContraseña(String usuarios) {
+        this.user=usuarios;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,8 +45,8 @@ public class ResetearContraseña extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        txtCodigo = new javax.swing.JTextField();
-        txtCorreo = new javax.swing.JTextField();
+        txtContraseñaVER = new javax.swing.JTextField();
+        txtContraseña = new javax.swing.JTextField();
         candadito = new javax.swing.JLabel();
         avatar = new javax.swing.JLabel();
         header = new javax.swing.JLabel();
@@ -55,15 +68,20 @@ public class ResetearContraseña extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(51, 51, 51));
         jButton1.setText("Resetear Contraseña");
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, 240, 30));
-
-        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 350, 40));
-        jPanel3.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 350, 40));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, 240, 30));
+
+        txtContraseñaVER.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtContraseñaVERActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtContraseñaVER, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 350, 40));
+        jPanel3.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 350, 40));
 
         candadito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_RecuperarContraseña/Forgot_Password.png"))); // NOI18N
         candadito.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -93,7 +111,7 @@ public class ResetearContraseña extends javax.swing.JFrame {
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 450, 580));
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_ResetearContra/Light theme1.png"))); // NOI18N
-        jPanel2.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 1280, 730));
+        jPanel2.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 1280, 740));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
@@ -127,9 +145,30 @@ public class ResetearContraseña extends javax.swing.JFrame {
                         this.dispose();
     }//GEN-LAST:event_candaditoMouseClicked
 
-    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+    private void txtContraseñaVERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaVERActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoActionPerformed
+    }//GEN-LAST:event_txtContraseñaVERActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      if(txtContraseña.getText().equals(txtContraseñaVER.getText())){
+//check whether the user enter same password in both textfield
+try{
+String updateQuery = "UPDATE `usuarios` SET `contraseña`=? WHERE user=?";
+con = DriverManager.getConnection("jdbc:mysql://localhost/proyecto1", "root","Teccnoyil1@");
+pst=con.prepareStatement(updateQuery);
+pst.setString(1, txtContraseñaVER.getText());
+pst.setString(2, user);
+pst.executeUpdate();
+JOptionPane.showMessageDialog(null, "Reset Successfully");
+
+
+}catch(Exception ex){
+JOptionPane.showMessageDialog(null, ex);
+}
+}else{
+JOptionPane.showMessageDialog(null, "password do not match");
+}
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,7 +220,7 @@ public class ResetearContraseña extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtContraseña;
+    private javax.swing.JTextField txtContraseñaVER;
     // End of variables declaration//GEN-END:variables
 }
