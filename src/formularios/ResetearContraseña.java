@@ -57,8 +57,6 @@ public String user;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -73,7 +71,7 @@ public String user;
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, 240, 30));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, 240, 30));
 
         txtContraseñaVER.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,7 +87,7 @@ public String user;
                 candaditoMouseClicked(evt);
             }
         });
-        jPanel3.add(candadito, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 450, 200, 30));
+        jPanel3.add(candadito, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, 200, 30));
 
         avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_ResetearContra/Avatar_Container.png"))); // NOI18N
         jPanel3.add(avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 450, 70));
@@ -111,9 +109,18 @@ public String user;
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 450, 580));
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_ResetearContra/Light theme1.png"))); // NOI18N
-        jPanel2.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 1280, 740));
+        jPanel2.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,17 +128,15 @@ public String user;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1280, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 720, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
@@ -141,8 +146,8 @@ public String user;
 
     private void candaditoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candaditoMouseClicked
         login form= new login();
-       form.setVisible(true);
-                        this.dispose();
+        form.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_candaditoMouseClicked
 
     private void txtContraseñaVERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaVERActionPerformed
@@ -150,24 +155,23 @@ public String user;
     }//GEN-LAST:event_txtContraseñaVERActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      if(txtContraseña.getText().equals(txtContraseñaVER.getText())){
-//check whether the user enter same password in both textfield
-try{
-String updateQuery = "UPDATE `usuarios` SET `contraseña`=? WHERE user=?";
-con = DriverManager.getConnection("jdbc:mysql://localhost/proyecto1", "root","Teccnoyil1@");
-pst=con.prepareStatement(updateQuery);
-pst.setString(1, txtContraseñaVER.getText());
-pst.setString(2, user);
-pst.executeUpdate();
-JOptionPane.showMessageDialog(null, "Reset Successfully");
+        if(txtContraseña.getText().equals(txtContraseñaVER.getText())){
+            //check whether the user enter same password in both textfield
+            try{
+                String updateQuery = "UPDATE `usuarios` SET `contraseña`=? WHERE correo='\"+txtCorreo.getText()";
+                con = DriverManager.getConnection("jdbc:mysql://localhost/proyecto1", "root","Teccnoyil1@");
+                pst=con.prepareStatement(updateQuery);
+                pst.setString(1, txtContraseñaVER.getText());
+                pst.setString(2, user);
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Reset Successfully");
 
-
-}catch(Exception ex){
-JOptionPane.showMessageDialog(null, ex);
-}
-}else{
-JOptionPane.showMessageDialog(null, "password do not match");
-}
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "password do not match");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

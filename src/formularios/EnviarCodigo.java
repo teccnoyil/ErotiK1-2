@@ -25,10 +25,7 @@ import javax.swing.JOptionPane;
  * @author big_a
  */
 public class EnviarCodigo extends javax.swing.JFrame {
-Connection con = null;
-ResultSet rs = null;
-PreparedStatement pst = null;
-public String user;
+
 
  int randomCode;
 
@@ -168,9 +165,9 @@ public String user;
 
     private void btntxtVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntxtVerificarActionPerformed
         if(Integer.valueOf(txtReContra.getText())==randomCode){
-ResetearContraseña form = new ResetearContraseña();
+ResetearContraseña form = new ResetearContraseña(txtCorreo.getText());
 form.setVisible(true);
-  this.dispose();
+  this.setVisible(false);
 }else{
 JOptionPane.showMessageDialog(null, "code do not match");
 }
