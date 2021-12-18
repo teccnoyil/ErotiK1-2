@@ -62,11 +62,13 @@ public class Inventario extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
         Precio1 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
         txtID = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
         FOTO = new javax.swing.JLabel();
+        fondoProducto = new javax.swing.JLabel();
         FONDO = new javax.swing.JLabel();
         Menu = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -87,10 +89,7 @@ public class Inventario extends javax.swing.JFrame {
 
         TablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Codigo", "Nombre", "Precio", "Imagen"
@@ -98,33 +97,37 @@ public class Inventario extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TablaDatos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, -1, 110));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 530, -1, 110));
 
         Detalles_Productos.setFont(new java.awt.Font("Roboto", 3, 24)); // NOI18N
-        Detalles_Productos.setText("Detalles Productos");
-        jPanel1.add(Detalles_Productos, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, -1, -1));
+        Detalles_Productos.setText("MODIFICACIÓN DE PRODUCTOS");
+        jPanel1.add(Detalles_Productos, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 110, -1, -1));
 
         Descripcion.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
+        Descripcion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/description.png"))); // NOI18N
         Descripcion.setText("Descripción:");
-        jPanel1.add(Descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 230, -1, -1));
-        jPanel1.add(txtDescripción, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 230, 220, -1));
+        jPanel1.add(Descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 220, -1, -1));
+        jPanel1.add(txtDescripción, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 220, 190, 30));
 
         Precio.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
+        Precio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/peso.png"))); // NOI18N
         Precio.setText("Precio:");
-        jPanel1.add(Precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 290, -1, -1));
+        jPanel1.add(Precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 270, -1, -1));
 
         IMAGEN.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
+        IMAGEN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/imagen.png"))); // NOI18N
         IMAGEN.setText("Imagen");
-        jPanel1.add(IMAGEN, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 290, -1, -1));
-        jPanel1.add(txtImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 290, 190, -1));
+        jPanel1.add(IMAGEN, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 390, -1, -1));
+        jPanel1.add(txtImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 390, 190, 30));
 
+        btnSeleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/agregar.png"))); // NOI18N
         btnSeleccionar.setText("Seleccionar");
         btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeleccionarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 290, -1, -1));
+        jPanel1.add(btnSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 440, 130, 40));
 
         btnModificar.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/Mostrar.png"))); // NOI18N
@@ -135,7 +138,7 @@ public class Inventario extends javax.swing.JFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 450, 100, -1));
+        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 460, 100, -1));
 
         btnNuevo.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/nuevo.png"))); // NOI18N
@@ -146,7 +149,7 @@ public class Inventario extends javax.swing.JFrame {
                 btnNuevoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 450, 90, -1));
+        jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 610, 100, -1));
 
         btnGuardar.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/guardar.png"))); // NOI18N
@@ -157,7 +160,7 @@ public class Inventario extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 450, 90, -1));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 610, 90, 40));
 
         btnActualizar.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/actualizar.png"))); // NOI18N
@@ -168,7 +171,7 @@ public class Inventario extends javax.swing.JFrame {
                 btnActualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 450, 100, -1));
+        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 670, 100, -1));
 
         btnCancelar.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/cancelar.png"))); // NOI18N
@@ -179,24 +182,37 @@ public class Inventario extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 450, 90, -1));
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 670, 90, -1));
+
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/limpiar.png"))); // NOI18N
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 480, 110, 40));
 
         Precio1.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
+        Precio1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/codigo.png"))); // NOI18N
         Precio1.setText("Codigo");
-        jPanel1.add(Precio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, -1, -1));
+        jPanel1.add(Precio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 330, -1, -1));
 
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoActionPerformed(evt);
             }
         });
-        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 230, 140, -1));
-        jPanel1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 350, 100, -1));
-        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 290, 140, -1));
-        jPanel1.add(FOTO, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 290, 280));
+        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 330, 190, 30));
+        jPanel1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 470, 100, -1));
+        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 270, 190, 30));
+        jPanel1.add(FOTO, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 330, 330));
 
-        FONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/Sign Up.png"))); // NOI18N
-        jPanel1.add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
+        fondoProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/color bg.png"))); // NOI18N
+        jPanel1.add(fondoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 400, 330));
+
+        FONDO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Inventario/fondo.png"))); // NOI18N
+        jPanel1.add(FONDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 810));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/menu.png"))); // NOI18N
         jMenu1.setText("Menu");
@@ -272,7 +288,7 @@ public class Inventario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1405, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,8 +306,6 @@ public class Inventario extends javax.swing.JFrame {
             txtDescripción.setText(TablaDatos.getValueAt(fila,2).toString()); 
             txtPrecio.setText(TablaDatos.getValueAt(fila, 3).toString());
             txtImagen.setText(TablaDatos.getValueAt(fila, 4).toString());
-
-
         }
         else{
             JOptionPane.showMessageDialog(null,"Fila no Seleccionada");
@@ -303,7 +317,8 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        Agregarusuario();
+
+        AgregarProductos();
         limpiar();
         listarproductos();
         
@@ -366,6 +381,7 @@ public void EliminarDatos() {
             if (n >= 0) {
                 JOptionPane.showMessageDialog(null, "Registro Eliminado");  // en caso de que la eliminacion haya sido correcta. nos lanzara el siguiente mensaje
                 limpiarTabla(model);
+                listarproductos();
             }
          } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al Eliminar Registro" + e.getMessage()); // en caso contrari de que este no funcionara, nos lanzara este siguiente mensaje
@@ -387,10 +403,10 @@ public void EliminarDatos() {
         }
     }
     
- public void Agregarusuario(){
-         String SQL="insert into inventario (codigo,Precio,imagen) values(?,?,?,?)";   // Instrucción SQL para poder introducir los campos necesarios para crear un nuevo usuario
-        
-        
+ public void AgregarProductos(){
+         
+     
+     String SQL="insert into inventario (codigo,Precio,imagen) values(?,?,?,?)";   // Instrucción SQL para poder introducir los campos necesarios para crear un nuevo usuario   
         try{
             PreparedStatement pst= con.prepareStatement(SQL);  // creamos un statement
             
@@ -440,6 +456,15 @@ public void EliminarDatos() {
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtPrecio.setText("");
+        txtCodigo.setText("");
+        txtDescripción.setText("");
+        txtImagen.setText("");
+        txtID.setText("");
+        FOTO.setText("");
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -497,9 +522,11 @@ public void EliminarDatos() {
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSeleccionar;
+    private javax.swing.JLabel fondoProducto;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;

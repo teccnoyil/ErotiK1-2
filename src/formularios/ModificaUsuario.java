@@ -19,13 +19,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ModificaUsuario extends javax.swing.JFrame {
 
-    conexionSQL cc = new conexionSQL();
+conexionSQL cc = new conexionSQL();
     Connection conectar;
     DefaultTableModel model;
     Statement st = null;
     ResultSet rs;
 
     com.mysql.jdbc.Connection con = cc.conexion();
+    //int Id;
 
     /**
      * Creates new form ModificaUsuario
@@ -33,7 +34,7 @@ public class ModificaUsuario extends javax.swing.JFrame {
     public ModificaUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
-        listar();
+       mostrarDatos();
     }
 
     /**
@@ -46,7 +47,6 @@ public class ModificaUsuario extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txtcontraN = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         BotonActualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -58,6 +58,7 @@ public class ModificaUsuario extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         txtID = new javax.swing.JTextField();
+        txtcontraN = new javax.swing.JTextField();
         btnModificar = new javax.swing.JButton();
         Fondo = new javax.swing.JLabel();
         Menu = new javax.swing.JMenuBar();
@@ -76,13 +77,6 @@ public class ModificaUsuario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtcontraN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcontraNActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtcontraN, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 410, 510, 30));
 
         jLabel4.setFont(new java.awt.Font("Roboto", 3, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -141,27 +135,34 @@ public class ModificaUsuario extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Roboto", 3, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Busqueda de Usuarios");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Roboto", 3, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("ID");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 370, -1, -1));
         jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 500, 520, 30));
-        jPanel1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, 190, 30));
 
-        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_CambiarUsuario/modificar.png"))); // NOI18N
+        txtID.setEditable(false);
+        txtID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIDActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 460, 190, 30));
+        jPanel1.add(txtcontraN, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 400, 510, 30));
+
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, -1, 40));
+        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 460, -1, -1));
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_CambiarUsuario/Sign Up.png"))); // NOI18N
         Fondo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 700));
+        jPanel1.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1280, 700));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_Principal/menu.png"))); // NOI18N
         jMenu1.setText("Menu");
@@ -247,45 +248,9 @@ public class ModificaUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtcontraNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontraNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcontraNActionPerformed
-
     private void BotonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonActualizarActionPerformed
 Modificarusuario();        
-      // limpiar();
-      //  listar();
-
-/*try{
-    String contraseña=String.valueOf(txtcontraN.getPassword());
-
-    String sql="Update usuarios set user=?, contraseña=?, correo=? "+
-            "where ID=?";
-    int fila=TablaDatos.getSelectedRow();
-    String dao=(String)TablaDatos.getValueAt(fila,0);
-    PreparedStatement ps=conectar.prepareCall(sql);
-    ps.setString(1,txtnombreN.getText());
-    ps.setString(2,contraseña);
-    ps.setString(3,txtCorreo.getText());
-
-     //BasedeDatos
-
-   ps.setString(4,dao);//la llamada sql se muestra en la tabla
-
-    int n=ps.executeUpdate();
-    if(n>0){
-        limpiar();
-        listar();
-        JOptionPane.showMessageDialog(null, "datos modificados");
-       
-    }
-}catch (Exception e){
-    JOptionPane.showMessageDialog(null, "error"+ e.getMessage());
-}*/
-         
-      
-
-
+ 
     }//GEN-LAST:event_BotonActualizarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -314,7 +279,7 @@ Modificarusuario();
 
     private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
         EliminarDatos();  // Esto nos permitirá eliminar los datos de algun usuario al hacer click en el boton de "Eliminar DAtos"
-        listar();
+        mostrarDatos();
         limpiar();
         
        
@@ -326,9 +291,18 @@ Modificarusuario();
         this.dispose();
     }//GEN-LAST:event_ItemProductosActionPerformed
 
+    private void ItemClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemClientesActionPerformed
+        ClientesFrecuentes form= new ClientesFrecuentes();
+       form.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ItemClientesActionPerformed
+
+    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIDActionPerformed
+
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        
-        int fila = TablaDatos.getSelectedRow();
+ int fila = TablaDatos.getSelectedRow();
         if (fila >=0){
             txtID.setText(TablaDatos.getValueAt(fila,0).toString());
             txtnombreN.setText(TablaDatos.getValueAt(fila,1).toString());
@@ -338,14 +312,7 @@ Modificarusuario();
         }
         else{
             JOptionPane.showMessageDialog(null,"Fila no Seleccionada");
-        }       
-    }//GEN-LAST:event_btnModificarActionPerformed
-
-    private void ItemClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemClientesActionPerformed
-        ClientesFrecuentes form= new ClientesFrecuentes();
-       form.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_ItemClientesActionPerformed
+        }           }//GEN-LAST:event_btnModificarActionPerformed
 
     public void EliminarDatos() {
         int filaSeleccionada = TablaDatos.getSelectedRow();       // convertiremos en un int  la fila seleccionada de nuestra tabla
@@ -358,19 +325,17 @@ Modificarusuario();
             int n = st.executeUpdate(SQL);
 
             if (n >= 0) {
-                JOptionPane.showMessageDialog(null, "Registro Eliminado");  // en caso de que la eliminacion haya sido correcta. nos lanzara el siguiente mensaje
+                JOptionPane.showMessageDialog(null, "Usuario Eliminado");  // en caso de que la eliminacion haya sido correcta. nos lanzara el siguiente mensaje
                 limpiarTabla(model);
             }
          } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al Eliminar Registro" + e.getMessage()); // en caso contrari de que este no funcionara, nos lanzara este siguiente mensaje
         }
 
-        }}
+        }}  
 
-    
-
-    public void listar() {
-        String sql = "select * from usuarios";
+     public void mostrarDatos() {
+   String sql = "select * from usuarios";
         try {
             con = cc.conexion();
             st = con.createStatement();
@@ -392,70 +357,51 @@ Modificarusuario();
 
     public void Actualizar() {
         limpiarTabla(model);
-        listar();
+        mostrarDatos();
     }
 
      public void Modificarusuario() {
-            /*String id = txtID.getText().trim();
-            String nombre = txtnombreN.getText().trim();
-            String contraN=String.valueOf(txtcontraN.getPassword());
-            String correo = txtCorreo.getText().trim();
-      try {
-            PreparedStatement ps = (PreparedStatement) conectar .prepareStatement("Update usuarios set user=?, contraseña=?, correo=? wbere ID=?");
-            
-            ps.setString(0,id);
-              ps.setString(1,nombre);
-                ps.setString(2,contraN);
-                  ps.setString(3, correo);
-                  
-                    //SET user='"+txtnombreN.getText()+",contraseña='"+txtcontraN.getText().trim()+",correo='"+txtCorreo.getText()
-            //+" WHERE ID="+txtID.getText()+";");
-           // ps.executeUpdate();
-             int n=ps.executeUpdate();
-    if(n>0){
-        limpiar();
-        listar();
-        JOptionPane.showMessageDialog(null, "datos modificados");
+ try{
+     String SQL ="update usuarios set user = ?. contraseña = ? , correo = ? , ID = ?";
+     int filas=TablaDatos.getSelectedRow();
+     String dao=(String)TablaDatos.getValueAt(filas,0);
+
+//String DI = txtID.getText().trim();
+ //PreparedStatement modificar = con.prepareStatement("update usuarios set user = ?. contraseña = ? , correo = ? , ID = "+DI);
+PreparedStatement modificar = con.prepareStatement(SQL);
+ modificar.setString(1,txtnombreN.getText().trim());
+  modificar.setString(2,txtcontraN.getText().trim());
+ modificar.setString(3,txtCorreo.getText().trim());
+ modificar.setString(4,dao);
+ modificar.execute();
+     JOptionPane.showMessageDialog(null,"Modificacion exitosa!!");
      
-    }
-           // JOptionPane.showMessageDialog(null, "Datos Actualizados");
-        } catch (SQLException ex) {
-            Logger.getLogger(ModificaUsuario.class.getName()).log(Level.SEVERE, null, ex);
-                        JOptionPane.showMessageDialog(null,"Error al Cambiar el Usuario"+ex.getMessage());
-
-        }   */
-         
-         
-         
-         
-try{
-   // String contraseña=String.valueOf(txtcontraN.getPassword());
-
-    String sql="UPDATE `usuarios` SET `user`=?,`contraseña`=?,`correo`=? WHERE ID=?";
-     int fila=TablaDatos.getSelectedRow();
-    String dao=(String)TablaDatos.getValueAt(fila,0);
-    PreparedStatement ps=conectar.prepareCall(sql);
-    ps.setString(1,txtID.getText());
-    ps.setString(2,txtnombreN.getText());
-    ps.setString(3,txtcontraN.getText());
-    ps.setString(4,txtCorreo.getText());
-
-     //BasedeDatos
-
-   ps.setString(5,dao);//la llamada sql se muestra en la tabla
-
-    int n=ps.executeUpdate();
-    if(n>0){
-        limpiar();
-        listar();
-        JOptionPane.showMessageDialog(null, "datos modificados");  
+     }catch(Exception error){
+    JOptionPane.showMessageDialog(null,"Error:"+ error);
+}
+ 
+ 
+ /*String nom=txtnombreN.getText().trim();  //nombre
+     String contra=txtcontraN.getText().trim();
+     String correo=txtCorreo.getText().trim();
+     String Id= txtID.getText().trim();
      
-    }
-    }catch (Exception e){
-    JOptionPane.showMessageDialog(null, "error"+ e.getMessage());
-
-    }
-
+     String SQL="update usuarios set user= '"+nom+"',contraseña='"+contra+"',correo='"+correo+"where ID="+Id;
+     if(nom.equals("")|| contra.equals("")){
+         JOptionPane.showMessageDialog(null,"Debe Ingresar Datos");
+     }else{
+         try{
+            con=cc.getConnection();
+           st=con.createStatement();
+             st.executeUpdate(SQL);
+         JOptionPane.showMessageDialog(null,"Datos Actualizados");
+             limpiar();
+         } catch (SQLException e) {
+         }
+     }*/
+           
+ 
+ 
      }
 
    public void limpiar() {
@@ -473,47 +419,13 @@ try{
             i = i - 1;
         }
     }
-    
-    
-    
-    
-    
-    
-    
+ 
+   
 
-    /*try{
-               
-        int filaSeleccionada=TablaDatos.getSelectedRow();
-        String dao=(String)TablaDatos.getValueAt(filaSeleccionada,0);
-         
-        String SQL="UPDATE usuarios set user=?, contraseña=?, where ID=? ";
-             
-             
-        PreparedStatement pst= con.prepareStatement(SQL);
-             pst.setString(1, txtnombreN.getText().trim());  
-            String pass=String.valueOf(txtcontraN.getPassword());                            
-            pst.setString(2,pass);
-            pst.setString(3,dao);
-            
-        
-            
-            
-            
-            
-            
-            
-           int n= pst.executeUpdate();
-           
-           if (n>=0){
-            JOptionPane.showMessageDialog(null,"Cambio de Usuario exitoso");
-
-           }
-            
-                    
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null,"Error al Cambiar el Usuario"+e.getMessage());
-        }
-    }*/
+   
+   
+   
+   
     /**
      * @param args the command line arguments
      */
@@ -575,7 +487,9 @@ try{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtID;
-    private javax.swing.JPasswordField txtcontraN;
+    private javax.swing.JTextField txtcontraN;
     private javax.swing.JTextField txtnombreN;
     // End of variables declaration//GEN-END:variables
+
+   
 }

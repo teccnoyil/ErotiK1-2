@@ -7,6 +7,7 @@ package conexion;
 
 import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,5 +31,13 @@ public class conexionSQL {
         return conectar;
     
 }
+
+    public Connection getConnection() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public PreparedStatement prepareStatement(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

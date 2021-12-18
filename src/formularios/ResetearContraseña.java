@@ -45,11 +45,11 @@ public String user;
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        txtContraseñaVER = new javax.swing.JTextField();
-        txtContraseña = new javax.swing.JTextField();
         candadito = new javax.swing.JLabel();
         avatar = new javax.swing.JLabel();
         header = new javax.swing.JLabel();
+        txtContraseña = new javax.swing.JPasswordField();
+        txtContraseñaVER = new javax.swing.JPasswordField();
         cuerpo = new javax.swing.JLabel();
         copy = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -71,15 +71,7 @@ public String user;
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, 240, 30));
-
-        txtContraseñaVER.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraseñaVERActionPerformed(evt);
-            }
-        });
-        jPanel3.add(txtContraseñaVER, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 350, 40));
-        jPanel3.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 350, 40));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, 240, 30));
 
         candadito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_RecuperarContraseña/Forgot_Password.png"))); // NOI18N
         candadito.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -95,6 +87,8 @@ public String user;
         header.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_ResetearContra/Card_Header.png"))); // NOI18N
         header.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, -1));
+        jPanel3.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 360, 40));
+        jPanel3.add(txtContraseñaVER, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 360, 40));
 
         cuerpo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contenido_ResetearContra/Card_Content.png"))); // NOI18N
         jPanel3.add(cuerpo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 430, 370));
@@ -150,15 +144,11 @@ public String user;
         this.dispose();
     }//GEN-LAST:event_candaditoMouseClicked
 
-    private void txtContraseñaVERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaVERActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraseñaVERActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(txtContraseña.getText().equals(txtContraseñaVER.getText())){
+        if(txtContraseña.getPassword().equals(txtContraseñaVER.getPassword())){
             //check whether the user enter same password in both textfield
             try{
-                String updateQuery = "UPDATE `usuarios` SET `contraseña`=? WHERE correo='\"+txtCorreo.getText()";
+                String updateQuery = "UPDATE usuaruios set contraseña'";
                 con = DriverManager.getConnection("jdbc:mysql://localhost/proyecto1", "root","Teccnoyil1@");
                 pst=con.prepareStatement(updateQuery);
                 pst.setString(1, txtContraseñaVER.getText());
@@ -224,7 +214,7 @@ public String user;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField txtContraseña;
-    private javax.swing.JTextField txtContraseñaVER;
+    private javax.swing.JPasswordField txtContraseña;
+    private javax.swing.JPasswordField txtContraseñaVER;
     // End of variables declaration//GEN-END:variables
 }
